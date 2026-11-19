@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>YGN TEA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--brand:#FAB3B3;--bg1:#FFE9E9;--bg2:#FAB3B3;--text:#4A2230;--muted:#7d4a58;--glass:rgba(255,255,255,.55);--glass-b:rgba(255,255,255,.7);--solid:#fff;--accent:#C2455E;--accent-t:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#2a1218;--bg2:#4a2230;--text:#FFE3E3;--muted:#f3bcc3;--glass:rgba(60,28,38,.7);--glass-b:rgba(250,179,179,.25);--solid:#3a1b25;--accent:#FAB3B3;--accent-t:#3a1620;color-scheme:dark}}
+:root[data-theme="dark"]{--bg1:#2a1218;--bg2:#4a2230;--text:#FFE3E3;--muted:#f3bcc3;--glass:rgba(60,28,38,.7);--glass-b:rgba(250,179,179,.25);--solid:#3a1b25;--accent:#FAB3B3;--accent-t:#3a1620;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:'Poppins','Noto Sans Myanmar','Myanmar Text',system-ui,sans-serif;color:var(--text);background:linear-gradient(160deg,var(--bg1),var(--bg2));background-color:var(--bg1);min-height:100vh;line-height:1.6}
+:lang(my){font-family:'Noto Sans Myanmar','Myanmar Text','Poppins',sans-serif;line-height:1.85}
+.glass{background:var(--glass);border:1px solid var(--glass-b);border-radius:22px;box-shadow:0 6px 20px rgba(120,40,60,.12)}
+.blur{-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%)}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin:10px auto 0;max-width:960px;padding:0 10px}
+nav{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px}
+.logo{font-weight:700;font-size:1.15rem;letter-spacing:.5px;margin-right:auto}
+.logo span{color:var(--accent)}
+.btn{border:0;cursor:pointer;font:inherit;font-weight:600;color:var(--accent-t);background:var(--accent);padding:8px 16px;border-radius:999px;transition:transform .15s}
+.btn:active{transform:scale(.95)}
+.btn.ghost{background:var(--glass);color:var(--text);border:1px solid var(--glass-b)}
+.badge{background:var(--accent-t);color:var(--accent);border-radius:99px;padding:0 7px;margin-left:4px;font-size:.8rem}
+section{padding:34px 0 6px;content-visibility:auto;contain-intrinsic-size:600px}
+h1{font-size:2.2rem;line-height:1.25;margin:0 0 10px}
+h2{font-size:1.5rem;margin:0 0 14px}
+.hero{padding:26px;text-align:center;margin-top:18px}
+.hero p{color:var(--muted);margin:0 0 18px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
+.tabs .btn{flex:none}
+.tabs .btn:not(.on){background:var(--glass);color:var(--text);border:1px solid var(--glass-b)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.item{padding:16px;display:flex;flex-direction:column;gap:6px}
+.item .em{font-size:2.4rem}
+.item b{font-size:1.02rem}
+.price{color:var(--accent);font-weight:700}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.info .glass{padding:18px}
+.info p{margin:4px 0;color:var(--muted)}
+.map{display:block;height:130px;border-radius:16px;margin-bottom:12px;background:
+radial-gradient(circle at 50% 45%,var(--accent) 0 7px,transparent 8px),
+repeating-linear-gradient(45deg,var(--glass-b) 0 2px,transparent 2px 22px),
+repeating-linear-gradient(-45deg,var(--glass-b) 0 2px,transparent 2px 22px),var(--solid)}
+footer{text-align:center;padding:30px 16px calc(30px + env(safe-area-inset-bottom,0px));color:var(--muted);font-size:.9rem}
+footer b{color:var(--accent)}
+.ov{position:fixed;inset:0;z-index:50;background:rgba(40,10,20,.4);display:none;align-items:flex-end;justify-content:center}
+.ov.show{display:flex}
+.sheet{width:100%;max-width:480px;max-height:88vh;overflow:auto;padding:20px;border-radius:26px 26px 0 0;background:var(--solid);border:1px solid var(--glass-b);color:var(--text)}
+@media(min-width:600px){.ov{align-items:center}.sheet{border-radius:26px}}
+input,textarea{width:100%;font:inherit;color:var(--text);background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;padding:11px 14px;margin:5px 0}
+.line{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--glass-b)}
+.line .n{flex:1}
+.q{width:28px;height:28px;border-radius:50%;border:0;background:var(--glass);color:var(--text);font-weight:700;cursor:pointer}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--accent);color:var(--accent-t);padding:10px 20px;border-radius:99px;z-index:60;display:none;font-weight:600}
+.ord{padding:10px 0;border-bottom:1px solid var(--glass-b);font-size:.92rem}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;margin-right:6px}
+</style>
+</head>
+<body>
+<header><nav class="glass blur">
+<div class="logo">🧋 YGN <span>TEA</span></div>
+<button class="btn ghost" id="lang" aria-label="Translate">EN</button>
+<button class="btn ghost" id="theme" aria-label="Theme">🌓</button>
+<button class="btn ghost" id="userBtn" data-i18n="login">Login</button>
+<button class="btn" id="cartBtn">🛒<span class="badge" id="cnt">0</span></button>
+</nav></header>
+
+<main class="wrap">
+<div class="glass hero blur">
+<h1 data-i18n="heroT">Fresh tea, made with love</h1>
+<p data-i18n="heroP">Yangon’s favourite milk tea, bubble tea and snacks.</p>
+<a class="btn" href="#menu" data-i18n="orderNow">Order now</a>
+</div>
+
+<section id="menu"><h2 data-i18n="menu">Menu</h2>
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div></section>
+
+<section id="orders">
+<h2 id="ordHead" data-i18n="myOrders">My Orders</h2>
+<div class="glass" style="padding:14px 18px" id="ordList"></div>
+</section>
+
+<section id="contact"><h2 data-i18n="find">Find us</h2>
+<div class="info">
+<div class="glass" style="padding:18px"><a class="map" id="mapA" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Nyaungdon+Myanmar" aria-label="Map"></a>
+<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Nyaungdon+Myanmar" data-i18n="openMap">Open in Google Maps</a></div>
+<div class="glass" style="padding:18px"><b data-i18n="addr">Address</b>
+<p data-i18n="addrV">Nyaungdon Township, Ayeyarwady Region</p>
+<b data-i18n="hours">Opening hours</b><p data-i18n="hoursV">Daily 6:00 AM – 9:00 PM</p>
+<b data-i18n="phone">Phone</b><p><a href="tel:+9595000000" style="color:var(--accent)">+95 9 500 000 00</a></p></div>
+</div></section>
+</main>
+
+<footer>© YGN TEA · Powered by <b>Aye Min Htet</b></footer>
+
+<div class="ov" id="cartOv"><div class="sheet">
+<div class="row"><h2 data-i18n="cart" style="margin:0">Your cart</h2><button class="q" data-close>✕</button></div>
+<div id="cartList"></div>
+<div class="row" style="margin:12px 0"><b data-i18n="total">Total</b><b class="price" id="total">0 Ks</b></div>
+<input id="oName" data-ph="name" placeholder="Name"><input id="oPhone" data-ph="phoneP" placeholder="Phone" inputmode="tel">
+<textarea id="oAddr" rows="2" data-ph="addrP" placeholder="Delivery address"></textarea>
+<button class="btn" style="width:100%;margin-top:8px" id="place" data-i18n="place">Place order</button>
+</div></div>
+
+<div class="ov" id="userOv"><div class="sheet">
+<div class="row"><h2 id="uT" style="margin:0" data-i18n="login">Login</h2><button class="q" data-close>✕</button></div>
+<div id="loggedIn" style="display:none"><p id="hi"></p><button class="btn" id="logout" data-i18n="logout">Log out</button></div>
+<div id="form">
+<input id="uName" data-ph="name" placeholder="Name"><input id="uPhone" data-ph="phoneP" placeholder="Phone" inputmode="tel">
+<input id="uPass" type="password" data-ph="pass" placeholder="Password">
+<button class="btn" style="width:100%;margin-top:8px" id="doLogin" data-i18n="login">Login</button>
+<p style="font-size:.85rem;color:var(--muted)" data-i18n="loginNote">New here? Just enter your details and we’ll create your account.</p></div>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, addDoc, getDoc, setDoc, doc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAdFhVVKQBs4u21iiFIFpT2iBYxZR8YtnY",
+  authDomain: "ygn-tea.firebaseapp.com",
+  projectId: "ygn-tea",
+  storageBucket: "ygn-tea.firebasestorage.app",
+  messagingSenderId: "542041040961",
+  appId: "1:542041040961:web:359e8bf281fad485ed3ec0",
+  measurementId: "G-X22CDNWGXQ"
+};
+
+const TG_BOT_TOKEN = "9128080140:AAHZcMANu83Q65gcwXfvI0Vu-0rKoD5ZJP4";
+const TG_CHAT_ID = "1665598519";
+
+async function sendTelegramAlert(text) {
+  if (!TG_BOT_TOKEN || !TG_CHAT_ID) return;
+  try {
+    await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: TG_CHAT_ID,
+        text: text,
+        parse_mode: "HTML"
+      })
+    });
+  } catch (e) {
+    console.error("Telegram alert failed:", e);
+  }
+}
+
+let db = null;
+try {
+  if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "YOUR_API_KEY") {
+    const app = initializeApp(firebaseConfig);
+    db = getFirestore(app);
+  }
+} catch (err) {
+  console.error("Firebase init error:", err);
+}
+
+var T={
+en:{login:"Login",logout:"Log out",heroT:"Fresh tea, made with love",heroP:"Yangon’s favourite milk tea, bubble tea and snacks.",orderNow:"Order now",menu:"Menu",myOrders:"My Orders",allOrders:"All Customer Orders (Owner)",find:"Find us",openMap:"Open in Google Maps",addr:"Address",addrV:"Nyaungdon Township, Ayeyarwady Region",hours:"Opening hours",hoursV:"Daily 6:00 AM – 9:00 PM",phone:"Phone",cart:"Your cart",total:"Total",place:"Place order",name:"Name",phoneP:"Phone",addrP:"Delivery address",pass:"Password",loginNote:"New here? Just enter your details and we’ll create your account.",add:"Add",empty:"Nothing yet",noOrd:"No orders yet",added:"Added to cart",fill:"Please fill in all details",needCart:"Cart is empty",ok:"Order placed! Thank you 🎉",hi:"Hello, ",all:"All",tea:"Tea",bubble:"Bubble Tea",snack:"Snacks",sending:"Sending..."},
+my:{login:"ဝင်ရန်",logout:"ထွက်ရန်",heroT:"ချစ်ခင်စွာ ဖျော်ပေးသော လတ်ဆတ်သည့် လက်ဖက်ရည်",heroP:"ရန်ကုန်သားများ အကြိုက်ဆုံး နို့လက်ဖက်ရည်၊ ပူဒင်းလက်ဖက်ရည်နှင့် မုန့်များ။",orderNow:"ယခုမှာမည်",menu:"မီနူး",myOrders:"ကျွန်ုပ်၏ အော်ဒါများ",allOrders:"ဝင်လာသော အော်ဒါအားလုံး (ဆိုင်ရှင်)",find:"ဆိုင်တည်နေရာ",openMap:"Google Maps တွင်ဖွင့်ရန်",addr:"လိပ်စာ",addrV:"ညောင်တုန်းမြို့၊ ဧရာဝတီတိုင်းဒေသကြီး",hours:"ဖွင့်ချိန်",hoursV:"နေ့စဉ် မနက် ၆:၀၀ မှ ည ၉:၀၀",phone:"ဖုန်း",cart:"ဈေးခြင်းတောင်း",total:"စုစုပေါင်း",place:"အော်ဒါတင်မည်",name:"အမည်",phoneP:"ဖုန်းနံပါတ်",addrP:"ပို့ဆောင်ရမည့် လိပ်စာ",pass:"စကားဝှက်",loginNote:"အသစ်ဆိုလျှင် အချက်အလက်ဖြည့်ပါ၊ အကောင့်အလိုအလျောက် ဖန်တီးပေးပါမည်။",add:"ထည့်မည်",empty:"မရှိသေးပါ",noOrd:"အော်ဒါ မရှိသေးပါ",added:"ခြင်းထဲ ထည့်ပြီး",fill:"အချက်အလက်အားလုံး ဖြည့်ပါ",needCart:"ခြင်းတောင်း ဗလာဖြစ်နေသည်",ok:"အော်ဒါတင်ပြီးပါပြီ၊ ကျေးဇူးတင်ပါတယ် 🎉",hi:"မင်္ဂလာပါ ",all:"အားလုံး",tea:"လက်ဖက်ရည်",bubble:"ပူဒင်းလက်ဖက်ရည်",snack:"မုန့်များ",sending:"ပို့နေပါသည်..."}};
+
+var M=[
+{id:1,c:"tea",e:"🍵",en:"Classic Milk Tea",my:"နို့လက်ဖက်ရည်",p:1500},
+{id:2,c:"tea",e:"🫖",en:"Burmese Strong Tea",my:"လက်ဖက်ရည်ကြမ်း",p:1200},
+{id:3,c:"tea",e:"🍋",en:"Lemon Iced Tea",my:"သံပုရာ လက်ဖက်ရည်အေး",p:2000},
+{id:4,c:"bubble",e:"🧋",en:"Brown Sugar Boba",my:"သကြားညို ပူဒင်းလက်ဖက်ရည်",p:3500},
+{id:5,c:"bubble",e:"🍓",en:"Strawberry Boba",my:"စတော်ဘယ်ရီ ပူဒင်းလက်ဖက်ရည်",p:3800},
+{id:6,c:"bubble",e:"🥭",en:"Mango Boba",my:"သရက် ပူဒင်းလက်ဖက်ရည်",p:3800},
+{id:7,c:"snack",e:"🥟",en:"Samosa (3 pcs)",my:"ဆမူဆာ (၃ ခု)",p:1500},
+{id:8,c:"snack",e:"🍞",en:"Toast with Butter",my:"ထောပတ်ပေါင်မုန့်",p:2000},
+{id:9,c:"snack",e:"🍛",en:"Nan Gyi Thoke",my:"နန်းကြီးသုပ်",p:2500}];
+
+var lang="my",cat="all",cart={},user=null,orders=[];
+function $(i){return document.getElementById(i)}
+function ld(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function t(k){return T[lang][k]||k}
+function fmt(n){return n.toLocaleString('en-US')+" Ks"}
+function toast(m){var x=$("toast");x.textContent=m;x.style.display="block";clearTimeout(toast.h);toast.h=setTimeout(function(){x.style.display="none"},1800)}
+
+function render(){
+  document.documentElement.lang=lang;
+  $("lang").textContent=lang=="my"?"EN":"မြန်";
+  document.querySelectorAll("[data-i18n]").forEach(function(e){e.textContent=t(e.dataset.i18n)});
+  document.querySelectorAll("[data-ph]").forEach(function(e){e.placeholder=t(e.dataset.ph)});
+  $("userBtn").textContent=user?(user.isOwner?"👑 Owner":"👤 "+user.name):t("login");
+  $("ordHead").textContent=(user&&user.isOwner)?t("allOrders"):t("myOrders");
+  var cs=["all","tea","bubble","snack"];
+  $("tabs").innerHTML=cs.map(function(c){return '<button class="btn'+(c==cat?' on':'')+'" data-c="'+c+'">'+t(c)+'</button>'}).join("");
+  $("grid").innerHTML=M.filter(function(m){return cat=="all"||m.c==cat}).map(function(m){
+    return '<div class="glass item"><div class="em">'+m.e+'</div><b>'+m[lang]+'</b><div class="row"><span class="price">'+fmt(m.p)+'</span><button class="btn" data-a="'+m.id+'">'+t("add")+'</button></div></div>'
+  }).join("");
+  renderCart();renderOrders();
+}
+
+function renderCart(){
+  var ids=Object.keys(cart),tot=0,n=0;
+  $("cartList").innerHTML=ids.length?ids.map(function(id){
+    var m=M.find(function(x){return x.id==id}),q=cart[id];tot+=m.p*q;n+=q;
+    return '<div class="line"><span>'+m.e+'</span><span class="n">'+m[lang]+'</span><button class="q" data-m="'+id+'">−</button><b>'+q+'</b><button class="q" data-a="'+id+'">+</button></div>'
+  }).join(""):'<p style="color:var(--muted)">'+t("empty")+'</p>';
+  $("total").textContent=fmt(tot);$("cnt").textContent=n;
+}
+
+function renderOrders(){
+  var o = [];
+  if (user && user.isOwner) {
+    o = orders;
+  } else if (user) {
+    o = orders.filter(function(x){return x.u == user.phone});
+  }
+  $("ordList").innerHTML=o.length?o.map(function(x){
+    var ownerInfo = (user && user.isOwner) ? '<br><small>👤 '+x.name+' ('+x.u+') · 📍 '+x.addr+'</small>' : '';
+    return '<div class="ord"><span class="status-dot"></span><b>#'+x.orderCode+'</b> · '+x.d+'<br>'+x.items+ownerInfo+'<br><span class="price">'+fmt(x.total)+'</span></div>'
+  }).join(""):'<p style="color:var(--muted);margin:6px 0">'+t("noOrd")+'</p>';
+}
+
+function open(id){$(id).classList.add("show")}
+function closeAll(){document.querySelectorAll(".ov").forEach(function(o){o.classList.remove("show")})}
+function userView(){
+  $("loggedIn").style.display=user?"block":"none";
+  $("form").style.display=user?"none":"block";
+  $("uT").textContent=user?"👤":t("login");
+  if(user)$("hi").textContent=t("hi")+user.name;
+}
+
+document.addEventListener("click",function(e){
+  var b=e.target.closest("button,.ov");if(!b)return;
+  if(b.dataset.c){cat=b.dataset.c;render()}
+  else if(b.dataset.a){var i=b.dataset.a;cart[i]=(cart[i]||0)+1;renderCart();if(b.closest("#grid"))toast(t("added"))}
+  else if(b.dataset.m){var j=b.dataset.m;cart[j]--;if(cart[j]<=0)delete cart[j];renderCart()}
+  else if(b.hasAttribute("data-close")||(b.classList.contains("ov")&&e.target==b))closeAll();
+});
+
+$("lang").onclick=function(){lang=lang=="my"?"en":"my";sv("ygn_lang",lang);render();userView()};
+$("theme").onclick=function(){var r=document.documentElement,d=r.dataset.theme?r.dataset.theme=="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.dataset.theme=d?"light":"dark";sv("ygn_theme",r.dataset.theme)};
+$("cartBtn").onclick=function(){renderCart();open("cartOv")};
+$("userBtn").onclick=function(){userView();open("userOv")};
+
+$("doLogin").onclick=async function(){
+  var n=$("uName").value.trim(),p=$("uPhone").value.trim(),w=$("uPass").value;
+  if(!n||!p||!w){toast(t("fill"));return}
+
+  if(n.toLowerCase()==="owner" && w==="ygntea123"){
+    user={name:"Owner",phone:p,isOwner:true};
+    sv("ygn_user",user);closeAll();render();toast(t("hi")+"Owner");
+    return;
+  }
+
+  var isNewUser = false;
+  if(db){
+    try {
+      const userRef = doc(db, "users", p);
+      const snap = await getDoc(userRef);
+      if(snap.exists()){
+        const data = snap.data();
+        if(data.pw !== w){toast("✗ Password Wrong");return;}
+        user={name:data.name,phone:p,isOwner:false};
+      } else {
+        isNewUser = true;
+        await setDoc(userRef, {name:n, phone:p, pw:w, createdAt:serverTimestamp()});
+        user={name:n,phone:p,isOwner:false};
+      }
+    } catch(e){
+      console.error(e);
+      toast("Firebase Error");
+      return;
+    }
+  } else {
+    var us=ld("ygn_users",{});
+    if(us[p]&&us[p].pw!==w){toast("✗");return}
+    if(!us[p]) isNewUser = true;
+    us[p]={name:us[p]?us[p].name:n,pw:w};sv("ygn_users",us);
+    user={name:us[p].name,phone:p,isOwner:false};
+  }
+
+  sendTelegramAlert(
+    `🔐 <b>YGN TEA ${isNewUser ? "New Account" : "Customer Login"}</b>\n` +
+    `👤 Name: ${user.name}\n` +
+    `📞 Phone: ${user.phone}`
+  );
+
+  sv("ygn_user",user);
+  $("oName").value=user.name;
+  $("oPhone").value=user.phone;
+  closeAll();render();toast(t("hi")+user.name);
+};
+
+$("logout").onclick=function(){user=null;sv("ygn_user",null);closeAll();render()};
+
+$("place").onclick=async function(){
+  var ids=Object.keys(cart);if(!ids.length){toast(t("needCart"));return}
+  var n=$("oName").value.trim(),p=$("oPhone").value.trim(),a=$("oAddr").value.trim();
+  if(!n||!p||!a){toast(t("fill"));return}
+
+  var btn=$("place");
+  btn.disabled=true;
+  btn.textContent=t("sending");
+
+  var tot=0,items=ids.map(function(id){
+    var m=M.find(function(x){return x.id==id});
+    tot+=m.p*cart[id];
+    return m.en+" ×"+cart[id];
+  }).join(", ");
+
+  var orderData = {
+    orderCode: Date.now().toString().slice(-6),
+    name: n,
+    u: user ? user.phone : p,
+    addr: a,
+    d: new Date().toLocaleString(),
+    items: items,
+    total: tot,
+    createdAt: Date.now()
+  };
+
+  if(db){
+    try {
+      await addDoc(collection(db, "orders"), orderData);
+    } catch(e) {
+      console.error("Order save error:", e);
+      toast("Error saving order");
+      btn.disabled=false;
+      btn.textContent=t("place");
+      return;
+    }
+  } else {
+    orders.unshift(orderData);
+    sv("ygn_orders",orders);
+  }
+
+  sendTelegramAlert(
+    `🧋 <b>NEW YGN TEA ORDER #${orderData.orderCode}</b>\n` +
+    `👤 Customer: ${orderData.name}\n` +
+    `📞 Phone: ${orderData.u}\n` +
+    `📍 Address: ${orderData.addr}\n` +
+    `🛒 Items: ${orderData.items}\n` +
+    `💰 Total: <b>${fmt(orderData.total)}</b>`
+  );
+
+  cart={};
+  btn.disabled=false;
+  btn.textContent=t("place");
+  closeAll();render();toast(t("ok"));
+};
+
+function listenOrders(){
+  if(!db){
+    orders=ld("ygn_orders",[]);
+    renderOrders();
+    return;
+  }
+  const q = query(collection(db, "orders"), orderBy("createdAt", "desc"));
+  onSnapshot(q, (snapshot) => {
+    orders = snapshot.docs.map(doc => doc.data());
+    renderOrders();
+  });
+}
+
+(function(){
+  lang=ld("ygn_lang","my");
+  user=ld("ygn_user",null);
+  var th=ld("ygn_theme",null);
+  if(th)document.documentElement.dataset.theme=th;
+  if(user){$("oName").value=user.name;$("oPhone").value=user.phone}
+  render();
+  listenOrders();
+})();
+</script>
+</body>
+</html>
