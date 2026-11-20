@@ -1,379 +1,1380 @@
 <!DOCTYPE html>
-<html lang="my">
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>YGN TEA</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--brand:#FAB3B3;--bg1:#FFE9E9;--bg2:#FAB3B3;--text:#4A2230;--muted:#7d4a58;--glass:rgba(255,255,255,.55);--glass-b:rgba(255,255,255,.7);--solid:#fff;--accent:#C2455E;--accent-t:#fff;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#2a1218;--bg2:#4a2230;--text:#FFE3E3;--muted:#f3bcc3;--glass:rgba(60,28,38,.7);--glass-b:rgba(250,179,179,.25);--solid:#3a1b25;--accent:#FAB3B3;--accent-t:#3a1620;color-scheme:dark}}
-:root[data-theme="dark"]{--bg1:#2a1218;--bg2:#4a2230;--text:#FFE3E3;--muted:#f3bcc3;--glass:rgba(60,28,38,.7);--glass-b:rgba(250,179,179,.25);--solid:#3a1b25;--accent:#FAB3B3;--accent-t:#3a1620;color-scheme:dark}
-html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;font-family:'Poppins','Noto Sans Myanmar','Myanmar Text',system-ui,sans-serif;color:var(--text);background:linear-gradient(160deg,var(--bg1),var(--bg2));background-color:var(--bg1);min-height:100vh;line-height:1.6}
-:lang(my){font-family:'Noto Sans Myanmar','Myanmar Text','Poppins',sans-serif;line-height:1.85}
-.glass{background:var(--glass);border:1px solid var(--glass-b);border-radius:22px;box-shadow:0 6px 20px rgba(120,40,60,.12)}
-.blur{-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%)}
-.wrap{max-width:960px;margin:0 auto;padding:0 16px}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin:10px auto 0;max-width:960px;padding:0 10px}
-nav{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px}
-.logo{font-weight:700;font-size:1.15rem;letter-spacing:.5px;margin-right:auto}
-.logo span{color:var(--accent)}
-.btn{border:0;cursor:pointer;font:inherit;font-weight:600;color:var(--accent-t);background:var(--accent);padding:8px 16px;border-radius:999px;transition:transform .15s}
-.btn:active{transform:scale(.95)}
-.btn.ghost{background:var(--glass);color:var(--text);border:1px solid var(--glass-b)}
-.badge{background:var(--accent-t);color:var(--accent);border-radius:99px;padding:0 7px;margin-left:4px;font-size:.8rem}
-section{padding:34px 0 6px;content-visibility:auto;contain-intrinsic-size:600px}
-h1{font-size:2.2rem;line-height:1.25;margin:0 0 10px}
-h2{font-size:1.5rem;margin:0 0 14px}
-.hero{padding:26px;text-align:center;margin-top:18px}
-.hero p{color:var(--muted);margin:0 0 18px}
-.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
-.tabs .btn{flex:none}
-.tabs .btn:not(.on){background:var(--glass);color:var(--text);border:1px solid var(--glass-b)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
-.item{padding:16px;display:flex;flex-direction:column;gap:6px}
-.item .em{font-size:2.4rem}
-.item b{font-size:1.02rem}
-.price{color:var(--accent);font-weight:700}
-.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
-.info .glass{padding:18px}
-.info p{margin:4px 0;color:var(--muted)}
-.map{display:block;height:130px;border-radius:16px;margin-bottom:12px;background:
-radial-gradient(circle at 50% 45%,var(--accent) 0 7px,transparent 8px),
-repeating-linear-gradient(45deg,var(--glass-b) 0 2px,transparent 2px 22px),
-repeating-linear-gradient(-45deg,var(--glass-b) 0 2px,transparent 2px 22px),var(--solid)}
-footer{text-align:center;padding:30px 16px calc(30px + env(safe-area-inset-bottom,0px));color:var(--muted);font-size:.9rem}
-footer b{color:var(--accent)}
-.ov{position:fixed;inset:0;z-index:50;background:rgba(40,10,20,.4);display:none;align-items:flex-end;justify-content:center}
-.ov.show{display:flex}
-.sheet{width:100%;max-width:480px;max-height:88vh;overflow:auto;padding:20px;border-radius:26px 26px 0 0;background:var(--solid);border:1px solid var(--glass-b);color:var(--text)}
-@media(min-width:600px){.ov{align-items:center}.sheet{border-radius:26px}}
-input,textarea{width:100%;font:inherit;color:var(--text);background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;padding:11px 14px;margin:5px 0}
-.line{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--glass-b)}
-.line .n{flex:1}
-.q{width:28px;height:28px;border-radius:50%;border:0;background:var(--glass);color:var(--text);font-weight:700;cursor:pointer}
-.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--accent);color:var(--accent-t);padding:10px 20px;border-radius:99px;z-index:60;display:none;font-weight:600}
-.ord{padding:10px 0;border-bottom:1px solid var(--glass-b);font-size:.92rem}
-.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;margin-right:6px}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YGN TEA — Fresh Tea, Made With Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+Myanmar:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(145deg, #FDE2E2 0%, #FAB3B3 52%, #F89E9E 100%);
+      --glass-bg: rgba(255, 255, 255, 0.68);
+      --glass-strong: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.82);
+      --accent: #A62639;
+      --accent-dark: #821B2B;
+      --accent-soft: rgba(166, 38, 57, 0.12);
+      --text-main: #2B1418;
+      --text-muted: #6E474E;
+      --shadow-soft: 0 12px 32px rgba(166, 38, 57, 0.14);
+      --radius-xl: 26px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+
+    body.dark-mode {
+      --bg-gradient: linear-gradient(145deg, #241014 0%, #36171E 55%, #1E0D11 100%);
+      --glass-bg: rgba(48, 22, 28, 0.72);
+      --glass-strong: rgba(58, 26, 33, 0.9);
+      --glass-border: rgba(250, 179, 179, 0.22);
+      --accent: #FAB3B3;
+      --accent-dark: #F68E8E;
+      --accent-soft: rgba(250, 179, 179, 0.15);
+      --text-main: #FFF2F2;
+      --text-muted: #D9B3B8;
+      --shadow-soft: 0 14px 34px rgba(0, 0, 0, 0.45);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans Myanmar', sans-serif;
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 14px 14px 40px;
+      transition: all 0.3s ease;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* Top Header */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+      position: sticky;
+      top: 10px;
+      z-index: 50;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--accent);
+      cursor: pointer;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-btn {
+      border: 1px solid var(--glass-border);
+      background: var(--glass-strong);
+      color: var(--text-main);
+      padding: 6px 11px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.2s;
+    }
+    .pill-btn:active { transform: scale(0.95); }
+
+    .cart-btn {
+      position: relative;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    body.dark-mode .cart-btn { color: #2B1418; }
+    .cart-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: #fff;
+      color: #A62639;
+      font-size: 0.68rem;
+      font-weight: 700;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      padding: 0 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 26px 18px 22px;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', 'Noto Sans Myanmar', serif;
+      font-style: italic;
+      font-size: 2rem;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .hero p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .hero-btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(166, 38, 57, 0.28);
+      transition: transform 0.15s;
+    }
+    body.dark-mode .btn-primary { color: #2B1418; }
+    .btn-primary:active { transform: scale(0.96); }
+
+    .btn-secondary {
+      background: var(--glass-strong);
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s, background 0.2s;
+    }
+    .btn-secondary:active { transform: scale(0.96); }
+
+    /* Section Headings */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 18px 4px 10px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', 'Noto Sans Myanmar', serif;
+      font-style: italic;
+      font-size: 1.45rem;
+      font-weight: 700;
+    }
+
+    /* Category Pills */
+    .cat-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      scrollbar-width: none;
+    }
+    .cat-bar::-webkit-scrollbar { display: none; }
+    .cat-pill {
+      white-space: nowrap;
+      padding: 7px 15px;
+      border-radius: 999px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color: var(--text-main);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .cat-pill.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    body.dark-mode .cat-pill.active { color: #2B1418; }
+
+    /* Menu Cards */
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .menu-card {
+      padding: 14px 16px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .menu-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      min-width: 0;
+    }
+    .menu-thumb {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      background: var(--accent-soft);
+      display: grid;
+      place-items: center;
+      font-size: 1.65rem;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .menu-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .menu-meta h3 {
+      font-size: 0.96rem;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+    .menu-meta .cat-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      background: var(--accent-soft);
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+    .menu-price {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .add-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    body.dark-mode .add-btn { color: #2B1418; }
+
+    .view-all-wrap {
+      margin-top: 12px;
+      text-align: center;
+    }
+    .view-all-btn {
+      width: 100%;
+      padding: 11px;
+      border-radius: 999px;
+      background: var(--glass-strong);
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.86rem;
+      cursor: pointer;
+    }
+
+    /* Views (Main, Category/All Page, Inside Shop Page) */
+    .view-section { display: none; }
+    .view-section.active { display: block; animation: fadeIn 0.25s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .back-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+    }
+
+    /* Posts & Customer Thoughts Cards */
+    .feed-card {
+      padding: 16px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 12px;
+    }
+    .feed-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .feed-author {
+      font-weight: 700;
+      font-size: 0.86rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .feed-time {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    .feed-text {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      margin-bottom: 10px;
+    }
+    .feed-media {
+      width: 100%;
+      border-radius: 14px;
+      margin-bottom: 10px;
+      max-height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+    .feed-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid var(--glass-border);
+      padding-top: 8px;
+    }
+    .react-btn {
+      background: var(--accent-soft);
+      border: none;
+      color: var(--text-main);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .del-btn {
+      margin-left: auto;
+      background: #dc2626;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .comment-box {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--glass-border);
+    }
+    .comment-item {
+      font-size: 0.8rem;
+      background: var(--glass-strong);
+      padding: 6px 10px;
+      border-radius: 10px;
+      margin-bottom: 5px;
+    }
+    .comment-form {
+      display: flex;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    /* Inputs & Forms */
+    input, textarea, select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-strong);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.85rem;
+      outline: none;
+    }
+    textarea { resize: vertical; min-height: 76px; }
+
+    /* Find Us / Info Card */
+    .info-card {
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .info-row { margin-bottom: 10px; }
+    .info-label { font-size: 0.78rem; font-weight: 700; color: var(--accent); margin-bottom: 2px; }
+    .info-val { font-size: 0.86rem; color: var(--text-muted); line-height: 1.45; }
+
+    /* Modal / Drawer */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 8, 10, 0.55);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-box {
+      width: 100%;
+      max-width: 440px;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 20px;
+      background: var(--glass-strong);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .close-x {
+      background: var(--accent-soft);
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    /* Admin Panel Tabs */
+    .admin-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .admin-tab {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      background: transparent;
+      color: var(--accent);
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .admin-tab.active {
+      background: var(--accent);
+      color: #fff;
+    }
+    body.dark-mode .admin-tab.active { color: #2B1418; }
+
+    .footer {
+      text-align: center;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 22px;
+    }
+    .empty-msg {
+      text-align: center;
+      padding: 22px 12px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
 </head>
 <body>
-<header><nav class="glass blur">
-<div class="logo">🧋 YGN <span>TEA</span></div>
-<button class="btn ghost" id="lang" aria-label="Translate">EN</button>
-<button class="btn ghost" id="theme" aria-label="Theme">🌓</button>
-<button class="btn ghost" id="userBtn" data-i18n="login">Login</button>
-<button class="btn" id="cartBtn">🛒<span class="badge" id="cnt">0</span></button>
-</nav></header>
+  <div class="container">
+    <!-- TOP BAR -->
+    <header class="topbar glass-card">
+      <div class="brand" onclick="switchView('homeView')">
+        <span>🫖 YGN TEA</span>
+      </div>
+      <div class="top-actions">
+        <button class="pill-btn" id="langBtn" onclick="toggleLang()">မြန်မာ</button>
+        <button class="pill-btn" onclick="toggleDarkMode()">🌓</button>
+        <button class="pill-btn" id="loginNavBtn" onclick="openOwnerModal()">Login</button>
+        <button class="cart-btn" onclick="openCartModal()" aria-label="Cart">
+          🛍️<span class="cart-badge" id="cartCount">0</span>
+        </button>
+      </div>
+    </header>
 
-<main class="wrap">
-<div class="glass hero blur">
-<h1 data-i18n="heroT">Fresh tea, made with love</h1>
-<p data-i18n="heroP">Yangon’s favourite milk tea, bubble tea and snacks.</p>
-<a class="btn" href="#menu" data-i18n="orderNow">Order now</a>
-</div>
+    <!-- OWNER ADMIN DASHBOARD (VISIBLE ONLY WHEN OWNER LOGGED IN) -->
+    <section id="adminDashboard" class="glass-card" style="display:none; padding:16px; margin-bottom:16px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <strong style="color:var(--accent);">👑 Owner / Admin Panel</strong>
+        <button class="pill-btn" onclick="ownerLogout()">Logout</button>
+      </div>
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchAdminTab('tabAddProduct', this)">+ Product</button>
+        <button class="admin-tab" onclick="switchAdminTab('tabAddPost', this)">+ Shop Post (Photo/VD)</button>
+        <button class="admin-tab" onclick="switchAdminTab('tabShopInfo', this)">Shop Info / Map</button>
+      </div>
 
-<section id="menu"><h2 data-i18n="menu">Menu</h2>
-<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div></section>
+      <!-- Add Product -->
+      <div id="tabAddProduct" class="admin-pane">
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <input type="text" id="prodNameEn" placeholder="Product Name (English) e.g. Classic Milk Tea" />
+          <input type="text" id="prodNameMy" placeholder="မီနူးအမည် (မြန်မာ) ဥပမာ - ရန်ကုန်ရှယ်နှပ်လက်ဖက်ရည်" />
+          <input type="number" id="prodPrice" placeholder="Price (Ks) e.g. 1500" />
+          <input type="text" id="prodCategory" placeholder="Category e.g. Tea, Bubble Tea, Snacks" />
+          <input type="text" id="prodImage" placeholder="Image URL (https://...) OR Emoji (🧋)" />
+          <button class="btn-primary" onclick="addProduct()">Save Product</button>
+        </div>
+      </div>
 
-<section id="orders">
-<h2 id="ordHead" data-i18n="myOrders">My Orders</h2>
-<div class="glass" style="padding:14px 18px" id="ordList"></div>
-</section>
+      <!-- Add Shop Post -->
+      <div id="tabAddPost" class="admin-pane" style="display:none;">
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <textarea id="ownerPostText" placeholder="ဆိုင်အကြောင်း / ပရိုမိုးရှင်း စာသားရေးပါ..."></textarea>
+          <select id="ownerPostMediaType">
+            <option value="none">No Media (စာသားသီးသန့်)</option>
+            <option value="image">Photo Link (ဓာတ်ပုံ Link)</option>
+            <option value="video">Video Link (.mp4 / Direct Video URL)</option>
+          </select>
+          <input type="text" id="ownerPostMediaUrl" placeholder="Paste Photo or Video URL here (https://...)" />
+          <button class="btn-primary" onclick="addOwnerPost()">Publish Shop Post</button>
+        </div>
+      </div>
 
-<section id="contact"><h2 data-i18n="find">Find us</h2>
-<div class="info">
-<div class="glass" style="padding:18px"><a class="map" id="mapA" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Nyaungdon+Myanmar" aria-label="Map"></a>
-<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Nyaungdon+Myanmar" data-i18n="openMap">Open in Google Maps</a></div>
-<div class="glass" style="padding:18px"><b data-i18n="addr">Address</b>
-<p data-i18n="addrV">Nyaungdon Township, Ayeyarwady Region</p>
-<b data-i18n="hours">Opening hours</b><p data-i18n="hoursV">Daily 6:00 AM – 9:00 PM</p>
-<b data-i18n="phone">Phone</b><p><a href="tel:+9595000000" style="color:var(--accent)">+95 9 500 000 00</a></p></div>
-</div></section>
-</main>
+      <!-- Edit Shop Info & Map -->
+      <div id="tabShopInfo" class="admin-pane" style="display:none;">
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <textarea id="infoAbout" placeholder="About YGN TEA (ဆိုင်အကြောင်း)"></textarea>
+          <input type="text" id="infoAddress" placeholder="Address (လိပ်စာ)" />
+          <input type="text" id="infoHours" placeholder="Opening Hours (ဆိုင်ဖွင့်ချိန်)" />
+          <input type="text" id="infoPhone" placeholder="Phone Number (ဖုန်းနံပါတ်)" />
+          <input type="text" id="infoMapUrl" placeholder="Google Maps Link" />
+          <button class="btn-primary" onclick="saveShopInfo()">Update Shop Info</button>
+        </div>
+      </div>
+    </section>
 
-<footer>© YGN TEA · Powered by <b>Aye Min Htet</b></footer>
+    <!-- ==================== VIEW 1: HOME VIEW ==================== -->
+    <main id="homeView" class="view-section active">
+      <!-- Hero Card with the 3 Requested Buttons -->
+      <section class="hero glass-card">
+        <h1 data-i18n="heroTitle">Fresh tea, made with love</h1>
+        <p data-i18n="heroSub">Yangon's favourite milk tea, bubble tea and snacks.</p>
 
-<div class="ov" id="cartOv"><div class="sheet">
-<div class="row"><h2 data-i18n="cart" style="margin:0">Your cart</h2><button class="q" data-close>✕</button></div>
-<div id="cartList"></div>
-<div class="row" style="margin:12px 0"><b data-i18n="total">Total</b><b class="price" id="total">0 Ks</b></div>
-<input id="oName" data-ph="name" placeholder="Name"><input id="oPhone" data-ph="phoneP" placeholder="Phone" inputmode="tel">
-<textarea id="oAddr" rows="2" data-ph="addrP" placeholder="Delivery address"></textarea>
-<button class="btn" style="width:100%;margin-top:8px" id="place" data-i18n="place">Place order</button>
-</div></div>
+        <div class="hero-btn-group">
+          <!-- Left Red Line: Customer Thoughts (Text + Emoji Only) -->
+          <button class="btn-secondary" onclick="openThoughtsModal()" data-i18n="btnThoughts">
+            💬 ရင်ထဲကစကားများ
+          </button>
 
-<div class="ov" id="userOv"><div class="sheet">
-<div class="row"><h2 id="uT" style="margin:0" data-i18n="login">Login</h2><button class="q" data-close>✕</button></div>
-<div id="loggedIn" style="display:none"><p id="hi"></p><button class="btn" id="logout" data-i18n="logout">Log out</button></div>
-<div id="form">
-<input id="uName" data-ph="name" placeholder="Name"><input id="uPhone" data-ph="phoneP" placeholder="Phone" inputmode="tel">
-<input id="uPass" type="password" data-ph="pass" placeholder="Password">
-<button class="btn" style="width:100%;margin-top:8px" id="doLogin" data-i18n="login">Login</button>
-<p style="font-size:.85rem;color:var(--muted)" data-i18n="loginNote">New here? Just enter your details and we’ll create your account.</p></div>
-</div></div>
-<div class="toast" id="toast"></div>
+          <!-- Center: Order Now (Unchanged) -->
+          <button class="btn-primary" onclick="scrollToMenu()" data-i18n="btnOrderNow">
+            Order now
+          </button>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, addDoc, getDoc, setDoc, doc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+          <!-- Right Red Line: Explore Shop (Bilingual) -->
+          <button class="btn-secondary" onclick="switchView('shopView')" data-i18n="btnEnterShop">
+            🏪 ဆိုင်ထဲ ဝင်ကြည့်မယ်
+          </button>
+        </div>
+      </section>
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAdFhVVKQBs4u21iiFIFpT2iBYxZR8YtnY",
-  authDomain: "ygn-tea.firebaseapp.com",
-  projectId: "ygn-tea",
-  storageBucket: "ygn-tea.firebasestorage.app",
-  messagingSenderId: "542041040961",
-  appId: "1:542041040961:web:359e8bf281fad485ed3ec0",
-  measurementId: "G-X22CDNWGXQ"
-};
+      <!-- Menu Section (Max 5 Cards + Categories + View All) -->
+      <section id="menuSection">
+        <div class="section-header">
+          <h2 class="section-title" data-i18n="menuTitle">Menu</h2>
+        </div>
 
-const TG_BOT_TOKEN = "9128080140:AAHZcMANu83Q65gcwXfvI0Vu-0rKoD5ZJP4";
-const TG_CHAT_ID = "1665598519";
+        <div class="cat-bar" id="homeCatBar"></div>
 
-async function sendTelegramAlert(text) {
-  if (!TG_BOT_TOKEN || !TG_CHAT_ID) return;
-  try {
-    await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: TG_CHAT_ID,
-        text: text,
-        parse_mode: "HTML"
-      })
-    });
-  } catch (e) {
-    console.error("Telegram alert failed:", e);
-  }
-}
+        <div class="menu-list" id="homeMenuList">
+          <div class="empty-msg" data-i18n="loadingMenu">Loading menu...</div>
+        </div>
 
-let db = null;
-try {
-  if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "YOUR_API_KEY") {
+        <!-- Bottom Red Line: View All -> Opens Category / Full Menu Page -->
+        <div class="view-all-wrap">
+          <button class="view-all-btn" onclick="openCategoryPage('All')" data-i18n="btnViewAll">
+            View All →
+          </button>
+        </div>
+      </section>
+
+      <!-- My Orders -->
+      <section>
+        <div class="section-header">
+          <h2 class="section-title" data-i18n="myOrdersTitle">My Orders</h2>
+        </div>
+        <div class="glass-card" style="padding:14px 16px;" id="myOrdersBox">
+          <p style="font-size:0.84rem; color:var(--text-muted);" data-i18n="noOrders">No orders yet</p>
+        </div>
+      </section>
+
+      <!-- Find Us -->
+      <section>
+        <div class="section-header">
+          <h2 class="section-title" data-i18n="findUsTitle">Find us</h2>
+        </div>
+
+        <div class="glass-card info-card" style="text-align:center;">
+          <div style="background:var(--glass-strong); border-radius:16px; padding:24px 12px; margin-bottom:12px;">
+            <div style="font-size:1.6rem; margin-bottom:6px;">📍</div>
+            <div style="font-size:0.82rem; color:var(--text-muted);">YGN TEA — Nyaungdon</div>
+          </div>
+          <a id="googleMapLink" href="https://maps.app.goo.gl/hkcLcoyC56nEt3eX9" target="_blank" rel="noopener" style="text-decoration:none;">
+            <button class="btn-primary" style="width:100%;" data-i18n="btnOpenMap">Open in Google Maps</button>
+          </a>
+        </div>
+
+        <div class="glass-card info-card">
+          <div class="info-row">
+            <div class="info-label" data-i18n="lblAddress">Address</div>
+            <div class="info-val" id="dispAddress">Nyaungdon Township, Ayeyarwady Region</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label" data-i18n="lblHours">Opening hours</div>
+            <div class="info-val" id="dispHours">Daily 6:00 AM - 10:00 PM</div>
+          </div>
+          <div class="info-row" style="margin-bottom:0;">
+            <div class="info-label" data-i18n="lblPhone">Phone</div>
+            <div class="info-val" id="dispPhone">+95 9 500 500 50</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================== VIEW 2: CATEGORY / ALL PRODUCTS PAGE ==================== -->
+    <section id="categoryView" class="view-section">
+      <div class="glass-card back-bar">
+        <button class="pill-btn" onclick="switchView('homeView')" data-i18n="btnBack">← Back</button>
+        <strong id="catPageTitle" style="color:var(--accent);">All Products</strong>
+        <span></span>
+      </div>
+
+      <div class="cat-bar" id="pageCatBar"></div>
+      <div class="menu-list" id="pageMenuList"></div>
+    </section>
+
+    <!-- ==================== VIEW 3: INSIDE SHOP VIEW (POSTS, PRODUCTS, ABOUT) ==================== -->
+    <section id="shopView" class="view-section">
+      <div class="glass-card back-bar">
+        <button class="pill-btn" onclick="switchView('homeView')" data-i18n="btnBack">← Back</button>
+        <strong data-i18n="shopInsideTitle">🏪 YGN TEA Shop</strong>
+        <span></span>
+      </div>
+
+      <!-- About Card -->
+      <div class="glass-card info-card">
+        <div class="info-label" data-i18n="aboutTitle">About Our Shop</div>
+        <div class="info-val" id="dispAbout">
+          ရန်ကုန်ရှယ်နှပ်လက်ဖက်ရည်နှင့် မုန့်မျိုးစုံကို လတ်ဆတ်သန့်ရှင်းစွာ နေ့စဉ် ဝန်ဆောင်မှုပေးနေပါသည်။
+        </div>
+      </div>
+
+      <!-- Owner Posts Feed (Photos, Videos, Text + Like/Comment) -->
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="shopPostsTitle">Shop Updates & Posts</h2>
+      </div>
+      <div id="ownerPostsList">
+        <div class="empty-msg">No posts yet.</div>
+      </div>
+
+      <!-- Full Products inside Shop -->
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="shopProductsTitle">Our Products</h2>
+      </div>
+      <div class="menu-list" id="shopMenuList"></div>
+    </section>
+
+    <footer class="footer">
+      © YGN TEA · Powered by <strong>Aye Min Htet</strong>
+    </footer>
+  </div>
+
+  <!-- ==================== MODAL 1: CUSTOMER THOUGHTS WALL (TEXT + EMOJI ONLY) ==================== -->
+  <div class="modal-backdrop" id="thoughtsModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <strong style="color:var(--accent);" data-i18n="thoughtsTitle">💬 ရင်ထဲကစကားများ (Customer Wall)</strong>
+        <button class="close-x" onclick="closeModal('thoughtsModal')">✕</button>
+      </div>
+
+      <p style="font-size:0.76rem; color:var(--text-muted); margin-bottom:8px;" data-i18n="thoughtsRule">
+        စာသားနှင့် Emoji များသာ ရေးတင်နိုင်ပါသည် (ဓာတ်ပုံ/Link တင်ခွင့်မရှိပါ)။
+      </p>
+
+      <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
+        <input type="text" id="thoughtAuthor" placeholder="သင့်အမည် (Optional) e.g. Tea Lover ☕" maxlength="30" />
+        <textarea id="thoughtText" placeholder="ရင်ထဲက လာတာ စိတ်ထဲရှိတာလေးတွေ ရေးတင်ခဲ့ပါ... ✨🫖" maxlength="350"></textarea>
+        <button class="btn-primary" onclick="submitCustomerThought()" data-i18n="btnPostThought">တင်မယ် (Post)</button>
+      </div>
+
+      <div id="thoughtsFeedList">
+        <div class="empty-msg">Loading thoughts...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 2: CART & TELEGRAM CHECKOUT ==================== -->
+  <div class="modal-backdrop" id="cartModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <strong style="color:var(--accent);" data-i18n="cartTitle">🛍️ Your Cart</strong>
+        <button class="close-x" onclick="closeModal('cartModal')">✕</button>
+      </div>
+      <div id="cartItemsList" style="margin-bottom:12px;"></div>
+      <div style="display:flex; justify-content:space-between; font-weight:700; margin-bottom:12px;">
+        <span data-i18n="totalLbl">Total:</span>
+        <span id="cartTotal">0 Ks</span>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <input type="text" id="custName" placeholder="Your Name / အမည်" />
+        <input type="tel" id="custPhone" placeholder="Phone Number / ဖုန်းနံပါတ်" />
+        <input type="text" id="custAddress" placeholder="Delivery Address / ပို့ရမည့်လိပ်စာ" />
+        <button class="btn-primary" onclick="placeOrder()" data-i18n="btnConfirmOrder">Confirm Order</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 3: OWNER LOGIN ==================== -->
+  <div class="modal-backdrop" id="ownerModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <strong style="color:var(--accent);">🔐 Owner Login</strong>
+        <button class="close-x" onclick="closeModal('ownerModal')">✕</button>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <input type="text" id="loginUser" placeholder="Username" />
+        <input type="password" id="loginPass" placeholder="Password" />
+        <button class="btn-primary" onclick="ownerLogin()">Login</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs & App Logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getFirestore, collection, addDoc, getDocs, doc, setDoc, getDoc,
+      deleteDoc, updateDoc, onSnapshot, query, orderBy, arrayUnion, increment, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // Firebase Config (Project: ygn-tea)
+    const firebaseConfig = {
+      projectId: "ygn-tea",
+      authDomain: "ygn-tea.firebaseapp.com",
+      storageBucket: "ygn-tea.appspot.com"
+    };
+
     const app = initializeApp(firebaseConfig);
-    db = getFirestore(app);
-  }
-} catch (err) {
-  console.error("Firebase init error:", err);
-}
+    const db = getFirestore(app);
 
-var T={
-en:{login:"Login",logout:"Log out",heroT:"Fresh tea, made with love",heroP:"Yangon’s favourite milk tea, bubble tea and snacks.",orderNow:"Order now",menu:"Menu",myOrders:"My Orders",allOrders:"All Customer Orders (Owner)",find:"Find us",openMap:"Open in Google Maps",addr:"Address",addrV:"Nyaungdon Township, Ayeyarwady Region",hours:"Opening hours",hoursV:"Daily 6:00 AM – 9:00 PM",phone:"Phone",cart:"Your cart",total:"Total",place:"Place order",name:"Name",phoneP:"Phone",addrP:"Delivery address",pass:"Password",loginNote:"New here? Just enter your details and we’ll create your account.",add:"Add",empty:"Nothing yet",noOrd:"No orders yet",added:"Added to cart",fill:"Please fill in all details",needCart:"Cart is empty",ok:"Order placed! Thank you 🎉",hi:"Hello, ",all:"All",tea:"Tea",bubble:"Bubble Tea",snack:"Snacks",sending:"Sending..."},
-my:{login:"ဝင်ရန်",logout:"ထွက်ရန်",heroT:"ချစ်ခင်စွာ ဖျော်ပေးသော လတ်ဆတ်သည့် လက်ဖက်ရည်",heroP:"ရန်ကုန်သားများ အကြိုက်ဆုံး နို့လက်ဖက်ရည်၊ ပူဒင်းလက်ဖက်ရည်နှင့် မုန့်များ။",orderNow:"ယခုမှာမည်",menu:"မီနူး",myOrders:"ကျွန်ုပ်၏ အော်ဒါများ",allOrders:"ဝင်လာသော အော်ဒါအားလုံး (ဆိုင်ရှင်)",find:"ဆိုင်တည်နေရာ",openMap:"Google Maps တွင်ဖွင့်ရန်",addr:"လိပ်စာ",addrV:"ညောင်တုန်းမြို့၊ ဧရာဝတီတိုင်းဒေသကြီး",hours:"ဖွင့်ချိန်",hoursV:"နေ့စဉ် မနက် ၆:၀၀ မှ ည ၉:၀၀",phone:"ဖုန်း",cart:"ဈေးခြင်းတောင်း",total:"စုစုပေါင်း",place:"အော်ဒါတင်မည်",name:"အမည်",phoneP:"ဖုန်းနံပါတ်",addrP:"ပို့ဆောင်ရမည့် လိပ်စာ",pass:"စကားဝှက်",loginNote:"အသစ်ဆိုလျှင် အချက်အလက်ဖြည့်ပါ၊ အကောင့်အလိုအလျောက် ဖန်တီးပေးပါမည်။",add:"ထည့်မည်",empty:"မရှိသေးပါ",noOrd:"အော်ဒါ မရှိသေးပါ",added:"ခြင်းထဲ ထည့်ပြီး",fill:"အချက်အလက်အားလုံး ဖြည့်ပါ",needCart:"ခြင်းတောင်း ဗလာဖြစ်နေသည်",ok:"အော်ဒါတင်ပြီးပါပြီ၊ ကျေးဇူးတင်ပါတယ် 🎉",hi:"မင်္ဂလာပါ ",all:"အားလုံး",tea:"လက်ဖက်ရည်",bubble:"ပူဒင်းလက်ဖက်ရည်",snack:"မုန့်များ",sending:"ပို့နေပါသည်..."}};
+    // Telegram Config
+    const TG_TOKEN = "9128080140:AAHZcMANu83Q65gcwXfvI0Vu-0rKoD5ZJP4";
+    const TG_CHAT_ID = "1665598519";
 
-var M=[
-{id:1,c:"tea",e:"🍵",en:"Classic Milk Tea",my:"နို့လက်ဖက်ရည်",p:1500},
-{id:2,c:"tea",e:"🫖",en:"Burmese Strong Tea",my:"လက်ဖက်ရည်ကြမ်း",p:1200},
-{id:3,c:"tea",e:"🍋",en:"Lemon Iced Tea",my:"သံပုရာ လက်ဖက်ရည်အေး",p:2000},
-{id:4,c:"bubble",e:"🧋",en:"Brown Sugar Boba",my:"သကြားညို ပူဒင်းလက်ဖက်ရည်",p:3500},
-{id:5,c:"bubble",e:"🍓",en:"Strawberry Boba",my:"စတော်ဘယ်ရီ ပူဒင်းလက်ဖက်ရည်",p:3800},
-{id:6,c:"bubble",e:"🥭",en:"Mango Boba",my:"သရက် ပူဒင်းလက်ဖက်ရည်",p:3800},
-{id:7,c:"snack",e:"🥟",en:"Samosa (3 pcs)",my:"ဆမူဆာ (၃ ခု)",p:1500},
-{id:8,c:"snack",e:"🍞",en:"Toast with Butter",my:"ထောပတ်ပေါင်မုန့်",p:2000},
-{id:9,c:"snack",e:"🍛",en:"Nan Gyi Thoke",my:"နန်းကြီးသုပ်",p:2500}];
+    // App State
+    let currentLang = "my";
+    let isOwner = localStorage.getItem("ygntea_owner") === "true";
+    let allProducts = [];
+    let selectedHomeCat = "All";
+    let selectedPageCat = "All";
+    let cart = JSON.parse(localStorage.getItem("ygntea_cart") || "[]");
 
-var lang="my",cat="all",cart={},user=null,orders=[];
-function $(i){return document.getElementById(i)}
-function ld(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
-function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-function t(k){return T[lang][k]||k}
-function fmt(n){return n.toLocaleString('en-US')+" Ks"}
-function toast(m){var x=$("toast");x.textContent=m;x.style.display="block";clearTimeout(toast.h);toast.h=setTimeout(function(){x.style.display="none"},1800)}
-
-function render(){
-  document.documentElement.lang=lang;
-  $("lang").textContent=lang=="my"?"EN":"မြန်";
-  document.querySelectorAll("[data-i18n]").forEach(function(e){e.textContent=t(e.dataset.i18n)});
-  document.querySelectorAll("[data-ph]").forEach(function(e){e.placeholder=t(e.dataset.ph)});
-  $("userBtn").textContent=user?(user.isOwner?"👑 Owner":"👤 "+user.name):t("login");
-  $("ordHead").textContent=(user&&user.isOwner)?t("allOrders"):t("myOrders");
-  var cs=["all","tea","bubble","snack"];
-  $("tabs").innerHTML=cs.map(function(c){return '<button class="btn'+(c==cat?' on':'')+'" data-c="'+c+'">'+t(c)+'</button>'}).join("");
-  $("grid").innerHTML=M.filter(function(m){return cat=="all"||m.c==cat}).map(function(m){
-    return '<div class="glass item"><div class="em">'+m.e+'</div><b>'+m[lang]+'</b><div class="row"><span class="price">'+fmt(m.p)+'</span><button class="btn" data-a="'+m.id+'">'+t("add")+'</button></div></div>'
-  }).join("");
-  renderCart();renderOrders();
-}
-
-function renderCart(){
-  var ids=Object.keys(cart),tot=0,n=0;
-  $("cartList").innerHTML=ids.length?ids.map(function(id){
-    var m=M.find(function(x){return x.id==id}),q=cart[id];tot+=m.p*q;n+=q;
-    return '<div class="line"><span>'+m.e+'</span><span class="n">'+m[lang]+'</span><button class="q" data-m="'+id+'">−</button><b>'+q+'</b><button class="q" data-a="'+id+'">+</button></div>'
-  }).join(""):'<p style="color:var(--muted)">'+t("empty")+'</p>';
-  $("total").textContent=fmt(tot);$("cnt").textContent=n;
-}
-
-function renderOrders(){
-  var o = [];
-  if (user && user.isOwner) {
-    o = orders;
-  } else if (user) {
-    o = orders.filter(function(x){return x.u == user.phone});
-  }
-  $("ordList").innerHTML=o.length?o.map(function(x){
-    var ownerInfo = (user && user.isOwner) ? '<br><small>👤 '+x.name+' ('+x.u+') · 📍 '+x.addr+'</small>' : '';
-    return '<div class="ord"><span class="status-dot"></span><b>#'+x.orderCode+'</b> · '+x.d+'<br>'+x.items+ownerInfo+'<br><span class="price">'+fmt(x.total)+'</span></div>'
-  }).join(""):'<p style="color:var(--muted);margin:6px 0">'+t("noOrd")+'</p>';
-}
-
-function open(id){$(id).classList.add("show")}
-function closeAll(){document.querySelectorAll(".ov").forEach(function(o){o.classList.remove("show")})}
-function userView(){
-  $("loggedIn").style.display=user?"block":"none";
-  $("form").style.display=user?"none":"block";
-  $("uT").textContent=user?"👤":t("login");
-  if(user)$("hi").textContent=t("hi")+user.name;
-}
-
-document.addEventListener("click",function(e){
-  var b=e.target.closest("button,.ov");if(!b)return;
-  if(b.dataset.c){cat=b.dataset.c;render()}
-  else if(b.dataset.a){var i=b.dataset.a;cart[i]=(cart[i]||0)+1;renderCart();if(b.closest("#grid"))toast(t("added"))}
-  else if(b.dataset.m){var j=b.dataset.m;cart[j]--;if(cart[j]<=0)delete cart[j];renderCart()}
-  else if(b.hasAttribute("data-close")||(b.classList.contains("ov")&&e.target==b))closeAll();
-});
-
-$("lang").onclick=function(){lang=lang=="my"?"en":"my";sv("ygn_lang",lang);render();userView()};
-$("theme").onclick=function(){var r=document.documentElement,d=r.dataset.theme?r.dataset.theme=="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.dataset.theme=d?"light":"dark";sv("ygn_theme",r.dataset.theme)};
-$("cartBtn").onclick=function(){renderCart();open("cartOv")};
-$("userBtn").onclick=function(){userView();open("userOv")};
-
-$("doLogin").onclick=async function(){
-  var n=$("uName").value.trim(),p=$("uPhone").value.trim(),w=$("uPass").value;
-  if(!n||!p||!w){toast(t("fill"));return}
-
-  if(n.toLowerCase()==="owner" && w==="ygntea123"){
-    user={name:"Owner",phone:p,isOwner:true};
-    sv("ygn_user",user);closeAll();render();toast(t("hi")+"Owner");
-    return;
-  }
-
-  var isNewUser = false;
-  if(db){
-    try {
-      const userRef = doc(db, "users", p);
-      const snap = await getDoc(userRef);
-      if(snap.exists()){
-        const data = snap.data();
-        if(data.pw !== w){toast("✗ Password Wrong");return;}
-        user={name:data.name,phone:p,isOwner:false};
-      } else {
-        isNewUser = true;
-        await setDoc(userRef, {name:n, phone:p, pw:w, createdAt:serverTimestamp()});
-        user={name:n,phone:p,isOwner:false};
+    // Bilingual Dictionary
+    const i18n = {
+      en: {
+        langBtn: "မြန်မာ",
+        heroTitle: "Fresh tea, made with love",
+        heroSub: "Yangon's favourite milk tea, bubble tea and snacks.",
+        btnThoughts: "💬 Customer Thoughts",
+        btnOrderNow: "Order now",
+        btnEnterShop: "🏪 Explore Shop",
+        menuTitle: "Menu",
+        btnViewAll: "View All →",
+        myOrdersTitle: "My Orders",
+        noOrders: "No orders yet",
+        findUsTitle: "Find us",
+        btnOpenMap: "Open in Google Maps",
+        lblAddress: "Address",
+        lblHours: "Opening hours",
+        lblPhone: "Phone",
+        btnBack: "← Back",
+        shopInsideTitle: "🏪 Inside YGN TEA",
+        aboutTitle: "About Our Shop",
+        shopPostsTitle: "Shop Updates & Posts",
+        shopProductsTitle: "Our Products",
+        thoughtsTitle: "💬 Customer Thoughts",
+        thoughtsRule: "Text and emojis only (no photos or links allowed).",
+        btnPostThought: "Post Thought",
+        cartTitle: "🛍️ Your Cart",
+        totalLbl: "Total:",
+        btnConfirmOrder: "Confirm Order",
+        addBtn: "Add",
+        loadingMenu: "Loading menu..."
+      },
+      my: {
+        langBtn: "English",
+        heroTitle: "မေတ္တာဖြင့် ဖျော်စပ်ထားသော လက်ဖက်ရည်",
+        heroSub: "ရန်ကုန်ရှယ်နှပ်လက်ဖက်ရည်၊ Bubble Tea နှင့် မုန့်မျိုးစုံ",
+        btnThoughts: "💬 ရင်ထဲကစကားများ",
+        btnOrderNow: "Order now",
+        btnEnterShop: "🏪 ဆိုင်ထဲ ဝင်ကြည့်မယ်",
+        menuTitle: "မီနူးများ (Menu)",
+        btnViewAll: "အားလုံးကြည့်မယ် (View All) →",
+        myOrdersTitle: "ကျွန်ုပ်၏ အော်ဒါများ",
+        noOrders: "အော်ဒါ မှာယူထားခြင်း မရှိသေးပါ",
+        findUsTitle: "ဆိုင်တည်နေရာ",
+        btnOpenMap: "Google Maps တွင် ကြည့်ရန်",
+        lblAddress: "လိပ်စာ",
+        lblHours: "ဆိုင်ဖွင့်ချိန်",
+        lblPhone: "ဖုန်းနံပါတ်",
+        btnBack: "← နောက်သို့",
+        shopInsideTitle: "🏪 YGN TEA ဆိုင်အတွင်းပိုင်း",
+        aboutTitle: "ဆိုင်အကြောင်း (About)",
+        shopPostsTitle: "ဆိုင်မှ ပို့စ်များနှင့် သတင်းများ",
+        shopProductsTitle: "ရရှိနိုင်သော ပစ္စည်းများ",
+        thoughtsTitle: "💬 ရင်ထဲကစကားများ",
+        thoughtsRule: "စာသားနှင့် Emoji များသာ ရေးတင်နိုင်ပါသည် (ပုံနှင့် Link တင်ခွင့်မရှိပါ)။",
+        btnPostThought: "ရေးတင်မယ်",
+        cartTitle: "🛍️ ဈေးခြင်းတောင်း",
+        totalLbl: "စုစုပေါင်း:",
+        btnConfirmOrder: "အော်ဒါ အတည်ပြုမယ်",
+        addBtn: "ထည့်မယ်",
+        loadingMenu: "မီနူးများ ရယူနေပါသည်..."
       }
-    } catch(e){
-      console.error(e);
-      toast("Firebase Error");
-      return;
+    };
+
+    window.applyLang = function () {
+      const dict = i18n[currentLang];
+      document.getElementById("langBtn").textContent = dict.langBtn;
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) el.textContent = dict[key];
+      });
+      renderHomeMenu();
+      renderPageMenu();
+      renderShopProducts();
+    };
+
+    window.toggleLang = function () {
+      currentLang = currentLang === "my" ? "en" : "my";
+      applyLang();
+    };
+
+    window.toggleDarkMode = function () {
+      document.body.classList.toggle("dark-mode");
+    };
+
+    window.switchView = function (viewId) {
+      document.querySelectorAll(".view-section").forEach(v => v.classList.remove("active"));
+      document.getElementById(viewId).classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    window.scrollToMenu = function () {
+      document.getElementById("menuSection").scrollIntoView({ behavior: "smooth" });
+    };
+
+    window.openCategoryPage = function (cat) {
+      selectedPageCat = cat || "All";
+      document.getElementById("catPageTitle").textContent =
+        selectedPageCat === "All" ? (currentLang === "my" ? "မီနူးအားလုံး" : "All Products") : selectedPageCat;
+      renderCategoryPills("pageCatBar", selectedPageCat, (c) => {
+        selectedPageCat = c;
+        document.getElementById("catPageTitle").textContent = c;
+        renderPageMenu();
+      });
+      renderPageMenu();
+      switchView("categoryView");
+    };
+
+    // Owner Auth
+    function updateOwnerUI() {
+      document.getElementById("adminDashboard").style.display = isOwner ? "block" : "none";
+      document.getElementById("loginNavBtn").textContent = isOwner ? "Admin ✓" : "Login";
     }
-  } else {
-    var us=ld("ygn_users",{});
-    if(us[p]&&us[p].pw!==w){toast("✗");return}
-    if(!us[p]) isNewUser = true;
-    us[p]={name:us[p]?us[p].name:n,pw:w};sv("ygn_users",us);
-    user={name:us[p].name,phone:p,isOwner:false};
-  }
 
-  sendTelegramAlert(
-    `🔐 <b>YGN TEA ${isNewUser ? "New Account" : "Customer Login"}</b>\n` +
-    `👤 Name: ${user.name}\n` +
-    `📞 Phone: ${user.phone}`
-  );
+    window.openOwnerModal = function () {
+      if (isOwner) {
+        document.getElementById("adminDashboard").scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+      document.getElementById("ownerModal").classList.add("open");
+    };
 
-  sv("ygn_user",user);
-  $("oName").value=user.name;
-  $("oPhone").value=user.phone;
-  closeAll();render();toast(t("hi")+user.name);
-};
+    window.ownerLogin = function () {
+      const u = document.getElementById("loginUser").value.trim();
+      const p = document.getElementById("loginPass").value.trim();
+      if (u === "owner" && p === "ygntea123") {
+        isOwner = true;
+        localStorage.setItem("ygntea_owner", "true");
+        updateOwnerUI();
+        closeModal("ownerModal");
+      } else {
+        alert("Invalid Owner credentials!");
+      }
+    };
 
-$("logout").onclick=function(){user=null;sv("ygn_user",null);closeAll();render()};
+    window.ownerLogout = function () {
+      isOwner = false;
+      localStorage.removeItem("ygntea_owner");
+      updateOwnerUI();
+    };
 
-$("place").onclick=async function(){
-  var ids=Object.keys(cart);if(!ids.length){toast(t("needCart"));return}
-  var n=$("oName").value.trim(),p=$("oPhone").value.trim(),a=$("oAddr").value.trim();
-  if(!n||!p||!a){toast(t("fill"));return}
+    window.switchAdminTab = function (tabId, btn) {
+      document.querySelectorAll(".admin-pane").forEach(p => p.style.display = "none");
+      document.querySelectorAll(".admin-tab").forEach(b => b.classList.remove("active"));
+      document.getElementById(tabId).style.display = "block";
+      btn.classList.add("active");
+    };
 
-  var btn=$("place");
-  btn.disabled=true;
-  btn.textContent=t("sending");
+    window.closeModal = function (id) {
+      document.getElementById(id).classList.remove("open");
+    };
 
-  var tot=0,items=ids.map(function(id){
-    var m=M.find(function(x){return x.id==id});
-    tot+=m.p*cart[id];
-    return m.en+" ×"+cart[id];
-  }).join(", ");
+    window.openThoughtsModal = function () {
+      document.getElementById("thoughtsModal").classList.add("open");
+    };
 
-  var orderData = {
-    orderCode: Date.now().toString().slice(-6),
-    name: n,
-    u: user ? user.phone : p,
-    addr: a,
-    d: new Date().toLocaleString(),
-    items: items,
-    total: tot,
-    createdAt: Date.now()
-  };
+    // ==================== FIRESTORE: PRODUCTS ====================
+    window.addProduct = async function () {
+      const nameEn = document.getElementById("prodNameEn").value.trim();
+      const nameMy = document.getElementById("prodNameMy").value.trim() || nameEn;
+      const price = Number(document.getElementById("prodPrice").value);
+      const category = document.getElementById("prodCategory").value.trim() || "Tea";
+      const image = document.getElementById("prodImage").value.trim() || "🧋";
 
-  if(db){
-    try {
-      await addDoc(collection(db, "orders"), orderData);
-    } catch(e) {
-      console.error("Order save error:", e);
-      toast("Error saving order");
-      btn.disabled=false;
-      btn.textContent=t("place");
-      return;
+      if (!nameEn || !price) return alert("Please enter product name and price.");
+
+      await addDoc(collection(db, "products"), {
+        nameEn, nameMy, price, category, image, createdAt: serverTimestamp()
+      });
+
+      document.getElementById("prodNameEn").value = "";
+      document.getElementById("prodNameMy").value = "";
+      document.getElementById("prodPrice").value = "";
+      document.getElementById("prodImage").value = "";
+      alert("Product added!");
+    };
+
+    window.deleteProduct = async function (id) {
+      if (!isOwner) return;
+      if (confirm("Delete this product?")) {
+        await deleteDoc(doc(db, "products", id));
+      }
+    };
+
+    function createProductCardHTML(item) {
+      const title = currentLang === "my" ? (item.nameMy || item.nameEn) : item.nameEn;
+      const isUrl = item.image && item.image.startsWith("http");
+      const thumb = isUrl ? `<img src="${item.image}" alt="${title}">` : (item.image || "🧋");
+      const addLabel = i18n[currentLang].addBtn;
+
+      return `
+        <div class="menu-card glass-card">
+          <div class="menu-info">
+            <div class="menu-thumb">${thumb}</div>
+            <div class="menu-meta">
+              <span class="cat-tag" onclick="openCategoryPage('${item.category}')">${item.category}</span>
+              <h3>${title}</h3>
+              <div class="menu-price">${Number(item.price).toLocaleString()} Ks</div>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px; align-items:flex-end;">
+            <button class="add-btn" onclick="addToCart('${item.id}')">${addLabel}</button>
+            ${isOwner ? `<button class="del-btn" onclick="deleteProduct('${item.id}')">Delete</button>` : ""}
+          </div>
+        </div>
+      `;
     }
-  } else {
-    orders.unshift(orderData);
-    sv("ygn_orders",orders);
-  }
 
-  sendTelegramAlert(
-    `🧋 <b>NEW YGN TEA ORDER #${orderData.orderCode}</b>\n` +
-    `👤 Customer: ${orderData.name}\n` +
-    `📞 Phone: ${orderData.u}\n` +
-    `📍 Address: ${orderData.addr}\n` +
-    `🛒 Items: ${orderData.items}\n` +
-    `💰 Total: <b>${fmt(orderData.total)}</b>`
-  );
+    function renderCategoryPills(containerId, activeCat, onSelect) {
+      const cats = ["All", ...new Set(allProducts.map(p => p.category).filter(Boolean))];
+      const el = document.getElementById(containerId);
+      el.innerHTML = cats.map(c => `
+        <button class="cat-pill ${c === activeCat ? 'active' : ''}" data-cat="${c}">${c}</button>
+      `).join("");
+      el.querySelectorAll(".cat-pill").forEach(btn => {
+        btn.onclick = () => {
+          const chosen = btn.getAttribute("data-cat");
+          onSelect(chosen);
+          renderCategoryPills(containerId, chosen, onSelect);
+        };
+      });
+    }
 
-  cart={};
-  btn.disabled=false;
-  btn.textContent=t("place");
-  closeAll();render();toast(t("ok"));
-};
+    function renderHomeMenu() {
+      const list = document.getElementById("homeMenuList");
+      if (!allProducts.length) {
+        list.innerHTML = `<div class="empty-msg">${currentLang === "my" ? "ဆိုင်ရှင်မှ မီနူးများ မတင်ရသေးပါ" : "No products uploaded by owner yet."}</div>`;
+        return;
+      }
+      const filtered = selectedHomeCat === "All"
+        ? allProducts
+        : allProducts.filter(p => p.category === selectedHomeCat);
 
-function listenOrders(){
-  if(!db){
-    orders=ld("ygn_orders",[]);
-    renderOrders();
-    return;
-  }
-  const q = query(collection(db, "orders"), orderBy("createdAt", "desc"));
-  onSnapshot(q, (snapshot) => {
-    orders = snapshot.docs.map(doc => doc.data());
-    renderOrders();
-  });
-}
+      // Show max 5 cards on Home
+      const limitedFive = filtered.slice(0, 5);
+      list.innerHTML = limitedFive.map(createProductCardHTML).join("");
+    }
 
-(function(){
-  lang=ld("ygn_lang","my");
-  user=ld("ygn_user",null);
-  var th=ld("ygn_theme",null);
-  if(th)document.documentElement.dataset.theme=th;
-  if(user){$("oName").value=user.name;$("oPhone").value=user.phone}
-  render();
-  listenOrders();
-})();
-</script>
+    function renderPageMenu() {
+      const list = document.getElementById("pageMenuList");
+      const filtered = selectedPageCat === "All"
+        ? allProducts
+        : allProducts.filter(p => p.category === selectedPageCat);
+      list.innerHTML = filtered.length
+        ? filtered.map(createProductCardHTML).join("")
+        : `<div class="empty-msg">No items in this category.</div>`;
+    }
+
+    function renderShopProducts() {
+      const list = document.getElementById("shopMenuList");
+      list.innerHTML = allProducts.length
+        ? allProducts.map(createProductCardHTML).join("")
+        : `<div class="empty-msg">No products yet.</div>`;
+    }
+
+    onSnapshot(query(collection(db, "products"), orderBy("createdAt", "asc")), (snap) => {
+      allProducts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      renderCategoryPills("homeCatBar", selectedHomeCat, (c) => {
+        // Clicking category in Home opens Category Page directly as requested
+        openCategoryPage(c);
+      });
+      renderHomeMenu();
+      renderPageMenu();
+      renderShopProducts();
+    });
+
+    // ==================== FIRESTORE: SHOP INFO & GOOGLE MAP ====================
+    window.saveShopInfo = async function () {
+      const payload = {
+        about: document.getElementById("infoAbout").value.trim(),
+        address: document.getElementById("infoAddress").value.trim(),
+        hours: document.getElementById("infoHours").value.trim(),
+        phone: document.getElementById("infoPhone").value.trim(),
+        mapUrl: document.getElementById("infoMapUrl").value.trim() || "https://maps.app.goo.gl/hkcLcoyC56nEt3eX9"
+      };
+      await setDoc(doc(db, "settings", "shopInfo"), payload, { merge: true });
+      alert("Shop Info & Map updated!");
+    };
+
+    onSnapshot(doc(db, "settings", "shopInfo"), (snap) => {
+      if (!snap.exists()) return;
+      const d = snap.data();
+      if (d.about) {
+        document.getElementById("dispAbout").textContent = d.about;
+        document.getElementById("infoAbout").value = d.about;
+      }
+      if (d.address) {
+        document.getElementById("dispAddress").textContent = d.address;
+        document.getElementById("infoAddress").value = d.address;
+      }
+      if (d.hours) {
+        document.getElementById("dispHours").textContent = d.hours;
+        document.getElementById("infoHours").value = d.hours;
+      }
+      if (d.phone) {
+        document.getElementById("dispPhone").textContent = d.phone;
+        document.getElementById("infoPhone").value = d.phone;
+      }
+      if (d.mapUrl) {
+        document.getElementById("googleMapLink").href = d.mapUrl;
+        document.getElementById("infoMapUrl").value = d.mapUrl;
+      }
+    });
+
+    // ==================== FIRESTORE: OWNER SHOP POSTS (PHOTO / VIDEO / TEXT) ====================
+    window.addOwnerPost = async function () {
+      if (!isOwner) return;
+      const text = document.getElementById("ownerPostText").value.trim();
+      const mediaType = document.getElementById("ownerPostMediaType").value;
+      const mediaUrl = document.getElementById("ownerPostMediaUrl").value.trim();
+
+      if (!text && !mediaUrl) return alert("Write a post or add media link.");
+
+      await addDoc(collection(db, "shopPosts"), {
+        text,
+        mediaType,
+        mediaUrl,
+        likes: 0,
+        comments: [],
+        createdAt: serverTimestamp()
+      });
+
+      document.getElementById("ownerPostText").value = "";
+      document.getElementById("ownerPostMediaUrl").value = "";
+      alert("Shop post published!");
+    };
+
+    window.likeShopPost = async function (id) {
+      await updateDoc(doc(db, "shopPosts", id), { likes: increment(1) });
+    };
+
+    window.commentShopPost = async function (id) {
+      const inp = document.getElementById("sp_cmt_" + id);
+      const val = inp.value.trim();
+      if (!val) return;
+      await updateDoc(doc(db, "shopPosts", id), {
+        comments: arrayUnion(val)
+      });
+      inp.value = "";
+    };
+
+    window.deleteShopPost = async function (id) {
+      if (!isOwner) return;
+      if (confirm("Delete this shop post?")) {
+        await deleteDoc(doc(db, "shopPosts", id));
+      }
+    };
+
+    onSnapshot(query(collection(db, "shopPosts"), orderBy("createdAt", "desc")), (snap) => {
+      const box = document.getElementById("ownerPostsList");
+      if (snap.empty) {
+        box.innerHTML = `<div class="empty-msg">No shop posts yet.</div>`;
+        return;
+      }
+      box.innerHTML = snap.docs.map(d => {
+        const p = d.data();
+        let mediaHTML = "";
+        if (p.mediaType === "image" && p.mediaUrl) {
+          mediaHTML = `<img src="${p.mediaUrl}" class="feed-media" alt="Shop post" />`;
+        } else if (p.mediaType === "video" && p.mediaUrl) {
+          mediaHTML = `<video src="${p.mediaUrl}" class="feed-media" controls playsinline></video>`;
+        }
+        const commentsHTML = (p.comments || []).map(c => `<div class="comment-item">💬 ${escapeHTML(c)}</div>`).join("");
+
+        return `
+          <div class="glass-card feed-card">
+            <div class="feed-header">
+              <span class="feed-author">🫖 YGN TEA Official</span>
+              ${isOwner ? `<button class="del-btn" onclick="deleteShopPost('${d.id}')">Delete</button>` : ""}
+            </div>
+            ${p.text ? `<div class="feed-text">${escapeHTML(p.text)}</div>` : ""}
+            ${mediaHTML}
+            <div class="feed-actions">
+              <button class="react-btn" onclick="likeShopPost('${d.id}')">❤️ ${p.likes || 0}</button>
+              <span style="font-size:0.76rem; color:var(--text-muted);">💬 ${(p.comments || []).length}</span>
+            </div>
+            <div class="comment-box">
+              ${commentsHTML}
+              <div class="comment-form">
+                <input type="text" id="sp_cmt_${d.id}" placeholder="Write a comment..." />
+                <button class="pill-btn" onclick="commentShopPost('${d.id}')">Send</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    });
+
+    // ==================== FIRESTORE: CUSTOMER THOUGHTS (TEXT + EMOJI ONLY) ====================
+    function escapeHTML(str) {
+      return String(str).replace(/[&<>"']/g, m => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[m]));
+    }
+
+    window.submitCustomerThought = async function () {
+      const author = document.getElementById("thoughtAuthor").value.trim() || "Guest ☕";
+      const text = document.getElementById("thoughtText").value.trim();
+
+      if (!text) return alert("စာသားလေး အရင်ရေးပေးပါဦးခင်ဗျာ။");
+      // Block image/URL links strictly so only text + emoji is posted
+      if (/https?:\/\/|www\.|<img|data:image/i.test(text)) {
+        return alert("စာသားနှင့် Emoji များသာ တင်ခွင့်ရှိပါသည် (Link/ပုံ မရပါ)။");
+      }
+
+      await addDoc(collection(db, "customerThoughts"), {
+        author,
+        text,
+        likes: 0,
+        comments: [],
+        createdAt: serverTimestamp()
+      });
+
+      document.getElementById("thoughtText").value = "";
+    };
+
+    window.likeThought = async function (id) {
+      await updateDoc(doc(db, "customerThoughts", id), { likes: increment(1) });
+    };
+
+    window.commentThought = async function (id) {
+      const inp = document.getElementById("th_cmt_" + id);
+      const val = inp.value.trim();
+      if (!val) return;
+      if (/https?:\/\/|www\./i.test(val)) return alert("Link ထည့်ခွင့်မရှိပါ။");
+      await updateDoc(doc(db, "customerThoughts", id), {
+        comments: arrayUnion(val)
+      });
+      inp.value = "";
+    };
+
+    window.deleteThought = async function (id) {
+      // ONLY Owner/Admin can delete
+      if (!isOwner) return;
+      if (confirm("Delete this customer post?")) {
+        await deleteDoc(doc(db, "customerThoughts", id));
+      }
+    };
+
+    onSnapshot(query(collection(db, "customerThoughts"), orderBy("createdAt", "desc")), (snap) => {
+      const box = document.getElementById("thoughtsFeedList");
+      if (snap.empty) {
+        box.innerHTML = `<div class="empty-msg">ရင်ထဲကစကားလေးတွေ ပထမဆုံး ရေးတင်လိုက်ပါ ✨</div>`;
+        return;
+      }
+      box.innerHTML = snap.docs.map(d => {
+        const t = d.data();
+        const commentsHTML = (t.comments || []).map(c => `<div class="comment-item">💭 ${escapeHTML(c)}</div>`).join("");
+
+        return `
+          <div class="glass-card feed-card">
+            <div class="feed-header">
+              <span class="feed-author">👤 ${escapeHTML(t.author || "Guest")}</span>
+              ${isOwner ? `<button class="del-btn" onclick="deleteThought('${d.id}')">Delete</button>` : ""}
+            </div>
+            <div class="feed-text">${escapeHTML(t.text)}</div>
+            <div class="feed-actions">
+              <button class="react-btn" onclick="likeThought('${d.id}')">❤️ ${t.likes || 0}</button>
+              <span style="font-size:0.76rem; color:var(--text-muted);">💬 ${(t.comments || []).length}</span>
+            </div>
+            <div class="comment-box">
+              ${commentsHTML}
+              <div class="comment-form">
+                <input type="text" id="th_cmt_${d.id}" placeholder="Comment ရေးရန်..." maxlength="200" />
+                <button class="pill-btn" onclick="commentThought('${d.id}')">Send</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    });
+
+    // ==================== CART & TELEGRAM ORDER ====================
+    function saveCart() {
+      localStorage.setItem("ygntea_cart", JSON.stringify(cart));
+      const count = cart.reduce((s, i) => s + i.qty, 0);
+      document.getElementById("cartCount").textContent = count;
+    }
+
+    window.addToCart = function (prodId) {
+      const prod = allProducts.find(p => p.id === prodId);
+      if (!prod) return;
+      const existing = cart.find(c => c.id === prodId);
+      if (existing) existing.qty += 1;
+      else cart.push({ id: prod.id, name: prod.nameEn, price: Number(prod.price), qty: 1 });
+      saveCart();
+    };
+
+    window.changeQty = function (idx, delta) {
+      cart[idx].qty += delta;
+      if (cart[idx].qty <= 0) cart.splice(idx, 1);
+      saveCart();
+      openCartModal();
+    };
+
+    window.openCartModal = function () {
+      const list = document.getElementById("cartItemsList");
+      if (!cart.length) {
+        list.innerHTML = `<div class="empty-msg">Cart is empty.</div>`;
+        document.getElementById("cartTotal").textContent = "0 Ks";
+      } else {
+        let total = 0;
+        list.innerHTML = cart.map((item, idx) => {
+          total += item.price * item.qty;
+          return `
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--glass-border);">
+              <div>
+                <div style="font-weight:700; font-size:0.86rem;">${item.name}</div>
+                <div style="font-size:0.76rem; color:var(--text-muted);">${item.price.toLocaleString()} Ks × ${item.qty}</div>
+              </div>
+              <div style="display:flex; gap:6px; align-items:center;">
+                <button class="pill-btn" onclick="changeQty(${idx}, -1)">-</button>
+                <span>${item.qty}</span>
+                <button class="pill-btn" onclick="changeQty(${idx}, 1)">+</button>
+              </div>
+            </div>
+          `;
+        }).join("");
+        document.getElementById("cartTotal").textContent = total.toLocaleString() + " Ks";
+      }
+      document.getElementById("cartModal").classList.add("open");
+    };
+
+    window.placeOrder = async function () {
+      if (!cart.length) return alert("Your cart is empty!");
+      const name = document.getElementById("custName").value.trim();
+      const phone = document.getElementById("custPhone").value.trim();
+      const address = document.getElementById("custAddress").value.trim();
+      if (!name || !phone) return alert("Please enter your name and phone number.");
+
+      const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      const summary = cart.map(i => `• ${i.name} x${i.qty} (${(i.price * i.qty).toLocaleString()} Ks)`).join("\n");
+
+      const msg = `🫖 *NEW YGN TEA ORDER*\n👤 Name: ${name}\n📞 Phone: ${phone}\n📍 Address: ${address || "-"}\n\n${summary}\n\n💰 *Total: ${total.toLocaleString()} Ks*`;
+
+      try {
+        await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: TG_CHAT_ID, text: msg, parse_mode: "Markdown" })
+        });
+      } catch (e) { console.error(e); }
+
+      await addDoc(collection(db, "orders"), {
+        name, phone, address, items: cart, total, createdAt: serverTimestamp()
+      });
+
+      document.getElementById("myOrdersBox").innerHTML = `
+        <div style="font-size:0.84rem;">
+          <strong>✅ Last Order (${total.toLocaleString()} Ks)</strong>
+          <div style="color:var(--text-muted); margin-top:4px; white-space:pre-line;">${summary}</div>
+        </div>
+      `;
+
+      cart = [];
+      saveCart();
+      closeModal("cartModal");
+      alert("Order sent successfully! 🫖");
+    };
+
+    // Init
+    updateOwnerUI();
+    saveCart();
+    applyLang();
+  </script>
 </body>
 </html>
