@@ -1222,7 +1222,7 @@
     // Security: Put your Cloudflare Worker / Cloud Function relay URL here instead of exposing a bot token in HTML
     const TG_RELAY_URL = "https://ygn-tea-tg.www-lastblood123.workers.dev/";
     // SHA-256 hash of default owner password ("ygntea123")
-    const OWNER_PASS_SHA256 = "67c6a105a4be8b3fd3f0793884d3a7e158e13a9705f5d1555c78e0a1ef9922c6";
+    const OWNER_PASS_SHA256 = "071b839909b1ec2b4a0bb81f22e963d9b196215c2665f5b3a05403284f08c417";
 
     async function sha256Hex(str) {
       const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
@@ -1925,7 +1925,7 @@
       const u = document.getElementById("oLoginUser").value.trim();
       const p = document.getElementById("oLoginPass").value.trim();
       const digest = await sha256Hex(p);
-      if (u.toLowerCase() === "owner" && digest === OWNER_PASS_SHA256) {
+      if (u.toLowerCase() === "junaid" && digest === OWNER_PASS_SHA256) {
         isOwner = true;
         currentUser = null;
         localStorage.setItem("ygntea_owner", "true");
