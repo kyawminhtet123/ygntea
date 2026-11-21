@@ -10,15 +10,15 @@
   <style>
     :root {
       --bg-gradient: linear-gradient(145deg, #FDE2E2 0%, #FAB3B3 52%, #F89E9E 100%);
-      --glass-bg: rgba(255, 255, 255, 0.68);
-      --glass-strong: rgba(255, 255, 255, 0.85);
-      --glass-border: rgba(255, 255, 255, 0.82);
+      --glass-bg: rgba(255, 255, 255, 0.72);
+      --glass-strong: rgba(255, 255, 255, 0.9);
+      --glass-border: rgba(255, 255, 255, 0.85);
       --accent: #A62639;
       --accent-dark: #821B2B;
       --accent-soft: rgba(166, 38, 57, 0.12);
       --text-main: #2B1418;
       --text-muted: #6E474E;
-      --shadow-soft: 0 12px 32px rgba(166, 38, 57, 0.14);
+      --shadow-soft: 0 12px 32px rgba(166, 38, 57, 0.15);
       --radius-xl: 26px;
       --radius-lg: 20px;
       --radius-md: 14px;
@@ -26,8 +26,8 @@
 
     body.dark-mode {
       --bg-gradient: linear-gradient(145deg, #241014 0%, #36171E 55%, #1E0D11 100%);
-      --glass-bg: rgba(48, 22, 28, 0.72);
-      --glass-strong: rgba(58, 26, 33, 0.9);
+      --glass-bg: rgba(48, 22, 28, 0.76);
+      --glass-strong: rgba(58, 26, 33, 0.92);
       --glass-border: rgba(250, 179, 179, 0.22);
       --accent: #FAB3B3;
       --accent-dark: #F68E8E;
@@ -44,12 +44,12 @@
       background-attachment: fixed;
       color: var(--text-main);
       min-height: 100vh;
-      padding: 14px 14px 40px;
+      padding: 14px 14px 50px;
       transition: all 0.3s ease;
     }
 
     .container {
-      max-width: 480px;
+      max-width: 500px;
       margin: 0 auto;
     }
 
@@ -67,11 +67,12 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 14px;
+      padding: 10px 12px;
       margin-bottom: 14px;
       position: sticky;
       top: 10px;
       z-index: 50;
+      gap: 6px;
     }
 
     .brand {
@@ -81,42 +82,64 @@
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       font-weight: 700;
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       color: var(--accent);
       cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid var(--accent);
+      background: #140d0e;
     }
 
     .top-actions {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     .pill-btn {
       border: 1px solid var(--glass-border);
       background: var(--glass-strong);
       color: var(--text-main);
-      padding: 6px 11px;
+      padding: 6px 9px;
       border-radius: 999px;
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       font-weight: 600;
       cursor: pointer;
-      transition: transform 0.15s ease, background 0.2s;
+      transition: transform 0.15s ease;
     }
     .pill-btn:active { transform: scale(0.95); }
+
+    select.lang-select {
+      width: auto;
+      padding: 5px 8px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
 
     .cart-btn {
       position: relative;
       background: var(--accent);
       color: #fff;
       border: none;
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       display: grid;
       place-items: center;
-      font-size: 1rem;
+      font-size: 0.95rem;
       cursor: pointer;
+      flex-shrink: 0;
     }
     body.dark-mode .cart-btn { color: #2B1418; }
     .cart-badge {
@@ -125,22 +148,31 @@
       right: -4px;
       background: #fff;
       color: #A62639;
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 700;
-      min-width: 18px;
-      height: 18px;
+      min-width: 17px;
+      height: 17px;
       border-radius: 999px;
       display: grid;
       place-items: center;
       padding: 0 4px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
 
     /* Hero Section */
     .hero {
-      padding: 26px 18px 22px;
+      padding: 24px 18px 22px;
       text-align: center;
       margin-bottom: 18px;
+    }
+    .hero-logo-banner {
+      width: 78px;
+      height: 78px;
+      border-radius: 22px;
+      object-fit: cover;
+      margin: 0 auto 10px;
+      display: block;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      border: 2px solid var(--glass-border);
     }
     .hero h1 {
       font-family: 'Cormorant Garamond', 'Noto Sans Myanmar', serif;
@@ -150,7 +182,7 @@
       margin-bottom: 8px;
     }
     .hero p {
-      font-size: 0.86rem;
+      font-size: 0.88rem;
       color: var(--text-muted);
       margin-bottom: 18px;
       line-height: 1.5;
@@ -172,11 +204,9 @@
       font-size: 0.85rem;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 6px 16px rgba(166, 38, 57, 0.28);
-      transition: transform 0.15s;
+      box-shadow: 0 6px 16px rgba(166, 38, 57, 0.25);
     }
     body.dark-mode .btn-primary { color: #2B1418; }
-    .btn-primary:active { transform: scale(0.96); }
 
     .btn-secondary {
       background: var(--glass-strong);
@@ -187,9 +217,7 @@
       font-size: 0.82rem;
       font-weight: 700;
       cursor: pointer;
-      transition: transform 0.15s, background 0.2s;
     }
-    .btn-secondary:active { transform: scale(0.96); }
 
     /* Section Headings */
     .section-header {
@@ -201,7 +229,7 @@
     .section-title {
       font-family: 'Cormorant Garamond', 'Noto Sans Myanmar', serif;
       font-style: italic;
-      font-size: 1.45rem;
+      font-size: 1.5rem;
       font-weight: 700;
     }
 
@@ -211,18 +239,18 @@
       gap: 8px;
       overflow-x: auto;
       padding-bottom: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       scrollbar-width: none;
     }
     .cat-bar::-webkit-scrollbar { display: none; }
     .cat-pill {
       white-space: nowrap;
-      padding: 7px 15px;
+      padding: 8px 16px;
       border-radius: 999px;
       border: 1px solid var(--glass-border);
       background: var(--glass-bg);
       color: var(--text-main);
-      font-size: 0.8rem;
+      font-size: 0.84rem;
       font-weight: 600;
       cursor: pointer;
     }
@@ -233,35 +261,35 @@
     }
     body.dark-mode .cat-pill.active { color: #2B1418; }
 
-    /* Menu Cards */
+    /* Larger Menu Cards */
     .menu-list {
       display: flex;
       flex-direction: column;
-      gap: 11px;
+      gap: 14px;
     }
     .menu-card {
-      padding: 14px 16px;
-      border-radius: var(--radius-lg);
+      padding: 18px;
+      border-radius: var(--radius-xl);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 14px;
     }
     .menu-info {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       flex: 1;
       min-width: 0;
     }
     .menu-thumb {
-      width: 54px;
-      height: 54px;
-      border-radius: 14px;
+      width: 82px;
+      height: 82px;
+      border-radius: 18px;
       background: var(--accent-soft);
       display: grid;
       place-items: center;
-      font-size: 1.65rem;
+      font-size: 2.2rem;
       flex-shrink: 0;
       overflow: hidden;
     }
@@ -271,22 +299,22 @@
       object-fit: cover;
     }
     .menu-meta h3 {
-      font-size: 0.96rem;
+      font-size: 1.08rem;
       font-weight: 700;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
     .menu-meta .cat-tag {
       display: inline-block;
-      font-size: 0.7rem;
+      font-size: 0.74rem;
       color: var(--text-muted);
       background: var(--accent-soft);
-      padding: 2px 8px;
+      padding: 3px 10px;
       border-radius: 999px;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       cursor: pointer;
     }
     .menu-price {
-      font-size: 0.86rem;
+      font-size: 0.98rem;
       font-weight: 700;
       color: var(--accent);
     }
@@ -294,9 +322,9 @@
       background: var(--accent);
       color: #fff;
       border: none;
-      padding: 8px 16px;
+      padding: 10px 18px;
       border-radius: 999px;
-      font-size: 0.8rem;
+      font-size: 0.86rem;
       font-weight: 700;
       cursor: pointer;
       flex-shrink: 0;
@@ -304,22 +332,43 @@
     body.dark-mode .add-btn { color: #2B1418; }
 
     .view-all-wrap {
-      margin-top: 12px;
+      margin-top: 14px;
       text-align: center;
     }
     .view-all-btn {
       width: 100%;
-      padding: 11px;
+      padding: 12px;
       border-radius: 999px;
       background: var(--glass-strong);
       border: 1.5px solid var(--accent);
       color: var(--accent);
       font-weight: 700;
-      font-size: 0.86rem;
+      font-size: 0.9rem;
       cursor: pointer;
     }
 
-    /* Views (Main, Category/All Page, Inside Shop Page) */
+    /* Custom Owner Quick Links Strip */
+    .custom-links-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .custom-link-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: var(--glass-strong);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    /* Views */
     .view-section { display: none; }
     .view-section.active { display: block; animation: fadeIn 0.25s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
@@ -346,17 +395,24 @@
     }
     .feed-author {
       font-weight: 700;
-      font-size: 0.86rem;
+      font-size: 0.88rem;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
-    .feed-time {
-      font-size: 0.72rem;
-      color: var(--text-muted);
+    .avatar-mini {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--accent);
+      background: var(--accent-soft);
+      display: inline-grid;
+      place-items: center;
+      font-size: 0.9rem;
     }
     .feed-text {
-      font-size: 0.92rem;
+      font-size: 0.94rem;
       line-height: 1.55;
       white-space: pre-wrap;
       margin-bottom: 10px;
@@ -365,7 +421,7 @@
       width: 100%;
       border-radius: 14px;
       margin-bottom: 10px;
-      max-height: 320px;
+      max-height: 340px;
       object-fit: cover;
       display: block;
     }
@@ -404,9 +460,9 @@
       border-top: 1px dashed var(--glass-border);
     }
     .comment-item {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       background: var(--glass-strong);
-      padding: 6px 10px;
+      padding: 7px 10px;
       border-radius: 10px;
       margin-bottom: 5px;
     }
@@ -416,7 +472,7 @@
       margin-top: 6px;
     }
 
-    /* Inputs & Forms */
+    /* Inputs */
     input, textarea, select {
       width: 100%;
       padding: 10px 12px;
@@ -430,20 +486,39 @@
     }
     textarea { resize: vertical; min-height: 76px; }
 
-    /* Find Us / Info Card */
+    /* Info Cards */
     .info-card {
       padding: 16px;
       margin-bottom: 12px;
     }
     .info-row { margin-bottom: 10px; }
-    .info-label { font-size: 0.78rem; font-weight: 700; color: var(--accent); margin-bottom: 2px; }
-    .info-val { font-size: 0.86rem; color: var(--text-muted); line-height: 1.45; }
+    .info-label { font-size: 0.8rem; font-weight: 700; color: var(--accent); margin-bottom: 2px; }
+    .info-val { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
 
-    /* Modal / Drawer */
+    /* Floating Owner Quick Link Button */
+    .fab-link-btn {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 80;
+      display: none;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 11px 15px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.3);
+      cursor: pointer;
+    }
+    body.dark-mode .fab-link-btn { color: #2B1418; }
+
+    /* Modals */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(20, 8, 10, 0.55);
+      background: rgba(20, 8, 10, 0.58);
       backdrop-filter: blur(6px);
       display: none;
       align-items: center;
@@ -454,14 +529,14 @@
     .modal-backdrop.open { display: flex; }
     .modal-box {
       width: 100%;
-      max-width: 440px;
+      max-width: 450px;
       max-height: 88vh;
       overflow-y: auto;
       padding: 20px;
       background: var(--glass-strong);
       border: 1px solid var(--glass-border);
       border-radius: var(--radius-xl);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
     }
     .modal-head {
       display: flex;
@@ -480,7 +555,7 @@
       cursor: pointer;
     }
 
-    /* Admin Panel Tabs */
+    /* Admin Tabs */
     .admin-tabs {
       display: flex;
       gap: 6px;
@@ -488,12 +563,12 @@
       flex-wrap: wrap;
     }
     .admin-tab {
-      padding: 6px 12px;
+      padding: 6px 11px;
       border-radius: 999px;
       border: 1px solid var(--accent);
       background: transparent;
       color: var(--accent);
-      font-size: 0.76rem;
+      font-size: 0.75rem;
       font-weight: 700;
       cursor: pointer;
     }
@@ -503,17 +578,64 @@
     }
     body.dark-mode .admin-tab.active { color: #2B1418; }
 
+    /* Footer & Circular Social Bubbles */
     .footer {
       text-align: center;
-      font-size: 0.76rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
-      margin-top: 22px;
+      margin-top: 24px;
+      padding-bottom: 18px;
     }
+    .powered-link {
+      font-weight: 700;
+      color: var(--accent);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .social-bubbles {
+      display: none;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 12px 0;
+    }
+    .social-bubbles.show {
+      display: flex;
+      animation: fadeIn 0.25s ease;
+    }
+    .social-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--glass-strong);
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 700;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.15s ease;
+    }
+    .social-circle:hover { transform: scale(1.08); }
+
+    .compliance-note {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      font-size: 0.75rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
     .empty-msg {
       text-align: center;
       padding: 22px 12px;
       color: var(--text-muted);
-      font-size: 0.85rem;
+      font-size: 0.86rem;
     }
   </style>
 </head>
@@ -522,19 +644,30 @@
     <!-- TOP BAR -->
     <header class="topbar glass-card">
       <div class="brand" onclick="switchView('homeView')">
-        <span>🫖 YGN TEA</span>
+        <img id="topLogoImg" src="" alt="YGN TEA" class="brand-logo" onerror="this.style.display='none'" />
+        <span>YGN TEA</span>
       </div>
       <div class="top-actions">
-        <button class="pill-btn" id="langBtn" onclick="toggleLang()">မြန်မာ</button>
+        <select id="langSelect" class="lang-select" onchange="changeLang(this.value)" aria-label="Language">
+          <option value="en">EN</option>
+          <option value="my">မြန်မာ</option>
+          <option value="ar">العربية</option>
+          <option value="zh">中文</option>
+          <option value="hi">हिन्दी</option>
+          <option value="ru">РУС</option>
+          <option value="ja">日本語</option>
+          <option value="th">ไทย</option>
+        </select>
         <button class="pill-btn" onclick="toggleDarkMode()">🌓</button>
-        <button class="pill-btn" id="loginNavBtn" onclick="openOwnerModal()">Login</button>
+        <button class="pill-btn" id="custAuthBtn" onclick="openCustomerModal()">Customer</button>
+        <button class="pill-btn" id="loginNavBtn" onclick="openOwnerModal()">Owner</button>
         <button class="cart-btn" onclick="openCartModal()" aria-label="Cart">
           🛍️<span class="cart-badge" id="cartCount">0</span>
         </button>
       </div>
     </header>
 
-    <!-- OWNER ADMIN DASHBOARD (VISIBLE ONLY WHEN OWNER LOGGED IN) -->
+    <!-- OWNER ADMIN DASHBOARD -->
     <section id="adminDashboard" class="glass-card" style="display:none; padding:16px; margin-bottom:16px;">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
         <strong style="color:var(--accent);">👑 Owner / Admin Panel</strong>
@@ -542,18 +675,19 @@
       </div>
       <div class="admin-tabs">
         <button class="admin-tab active" onclick="switchAdminTab('tabAddProduct', this)">+ Product</button>
-        <button class="admin-tab" onclick="switchAdminTab('tabAddPost', this)">+ Shop Post (Photo/VD)</button>
-        <button class="admin-tab" onclick="switchAdminTab('tabShopInfo', this)">Shop Info / Map</button>
+        <button class="admin-tab" onclick="switchAdminTab('tabAddPost', this)">+ Shop Post</button>
+        <button class="admin-tab" onclick="switchAdminTab('tabShopInfo', this)">Shop / Logo / Mail</button>
+        <button class="admin-tab" onclick="switchAdminTab('tabSocialLinks', this)">Social & Links</button>
       </div>
 
       <!-- Add Product -->
       <div id="tabAddProduct" class="admin-pane">
         <div style="display:flex; flex-direction:column; gap:8px;">
-          <input type="text" id="prodNameEn" placeholder="Product Name (English) e.g. Classic Milk Tea" />
-          <input type="text" id="prodNameMy" placeholder="မီနူးအမည် (မြန်မာ) ဥပမာ - ရန်ကုန်ရှယ်နှပ်လက်ဖက်ရည်" />
+          <input type="text" id="prodNameEn" placeholder="Product Name (English)" />
+          <input type="text" id="prodNameMy" placeholder="Product Name (Myanmar / Optional)" />
           <input type="number" id="prodPrice" placeholder="Price (Ks) e.g. 1500" />
           <input type="text" id="prodCategory" placeholder="Category e.g. Tea, Bubble Tea, Snacks" />
-          <input type="text" id="prodImage" placeholder="Image URL (https://...) OR Emoji (🧋)" />
+          <input type="text" id="prodImage" placeholder="Direct Image URL (https://i.ibb.co/...) OR Emoji" />
           <button class="btn-primary" onclick="addProduct()">Save Product</button>
         </div>
       </div>
@@ -561,53 +695,68 @@
       <!-- Add Shop Post -->
       <div id="tabAddPost" class="admin-pane" style="display:none;">
         <div style="display:flex; flex-direction:column; gap:8px;">
-          <textarea id="ownerPostText" placeholder="ဆိုင်အကြောင်း / ပရိုမိုးရှင်း စာသားရေးပါ..."></textarea>
+          <textarea id="ownerPostText" placeholder="Write shop update / promotion text..."></textarea>
           <select id="ownerPostMediaType">
-            <option value="none">No Media (စာသားသီးသန့်)</option>
-            <option value="image">Photo Link (ဓာတ်ပုံ Link)</option>
+            <option value="none">Text Only</option>
+            <option value="image">Photo Link (Direct URL)</option>
             <option value="video">Video Link (.mp4 / Direct Video URL)</option>
           </select>
-          <input type="text" id="ownerPostMediaUrl" placeholder="Paste Photo or Video URL here (https://...)" />
+          <input type="text" id="ownerPostMediaUrl" placeholder="Paste Photo or Video URL (https://...)" />
           <button class="btn-primary" onclick="addOwnerPost()">Publish Shop Post</button>
         </div>
       </div>
 
-      <!-- Edit Shop Info & Map -->
+      <!-- Shop Info, Logo & Gmail -->
       <div id="tabShopInfo" class="admin-pane" style="display:none;">
         <div style="display:flex; flex-direction:column; gap:8px;">
-          <textarea id="infoAbout" placeholder="About YGN TEA (ဆိုင်အကြောင်း)"></textarea>
-          <input type="text" id="infoAddress" placeholder="Address (လိပ်စာ)" />
-          <input type="text" id="infoHours" placeholder="Opening Hours (ဆိုင်ဖွင့်ချိန်)" />
-          <input type="text" id="infoPhone" placeholder="Phone Number (ဖုန်းနံပါတ်)" />
+          <input type="text" id="infoLogoUrl" placeholder="Logo Direct Image URL (https://i.ibb.co/...)" />
+          <textarea id="infoAbout" placeholder="About YGN TEA"></textarea>
+          <input type="text" id="infoAddress" placeholder="Address" />
+          <input type="text" id="infoHours" placeholder="Opening Hours" />
+          <input type="text" id="infoPhone" placeholder="Phone Number" />
+          <input type="email" id="infoEmail" placeholder="Contact Gmail (e.g. ygntea@gmail.com)" />
           <input type="text" id="infoMapUrl" placeholder="Google Maps Link" />
           <button class="btn-primary" onclick="saveShopInfo()">Update Shop Info</button>
+        </div>
+      </div>
+
+      <!-- Social Links & Custom Links -->
+      <div id="tabSocialLinks" class="admin-pane" style="display:none;">
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <input type="text" id="socTiktok" placeholder="TikTok URL" />
+          <input type="text" id="socFacebook" placeholder="Facebook URL" />
+          <input type="text" id="socTelegram" placeholder="Telegram URL" />
+          <input type="text" id="socReddit" placeholder="Reddit URL" />
+          <input type="text" id="socYoutube" placeholder="YouTube URL" />
+          <button class="btn-primary" onclick="saveSocialLinks()">Save Social Links</button>
+          <hr style="border:0; border-top:1px solid var(--glass-border); margin:6px 0;" />
+          <input type="text" id="quickLinkLabel" placeholder="New Link Button Label (e.g. Promo Menu)" />
+          <input type="text" id="quickLinkUrl" placeholder="New Link URL (https://...)" />
+          <button class="btn-secondary" onclick="addCustomQuickLink()">+ Add Link Button</button>
         </div>
       </div>
     </section>
 
     <!-- ==================== VIEW 1: HOME VIEW ==================== -->
     <main id="homeView" class="view-section active">
-      <!-- Hero Card with the 3 Requested Buttons -->
       <section class="hero glass-card">
+        <img id="heroLogoImg" src="" alt="YGN TEA Logo" class="hero-logo-banner" onerror="this.style.display='none'" />
         <h1 data-i18n="heroTitle">Fresh tea, made with love</h1>
         <p data-i18n="heroSub">Yangon's favourite milk tea, bubble tea and snacks.</p>
 
         <div class="hero-btn-group">
-          <!-- Left Red Line: Customer Thoughts (Text + Emoji Only) -->
           <button class="btn-secondary" onclick="openThoughtsModal()" data-i18n="btnThoughts">
-            💬 ရင်ထဲကစကားများ
+            💬 Customer Thoughts
           </button>
-
-          <!-- Center: Order Now (Unchanged) -->
           <button class="btn-primary" onclick="scrollToMenu()" data-i18n="btnOrderNow">
             Order now
           </button>
-
-          <!-- Right Red Line: Explore Shop (Bilingual) -->
           <button class="btn-secondary" onclick="switchView('shopView')" data-i18n="btnEnterShop">
-            🏪 ဆိုင်ထဲ ဝင်ကြည့်မယ်
+            🏪 Explore Shop
           </button>
         </div>
+
+        <div id="customQuickLinksBar" class="custom-links-wrap" style="justify-content:center;"></div>
       </section>
 
       <!-- Menu Section (Max 5 Cards + Categories + View All) -->
@@ -622,7 +771,6 @@
           <div class="empty-msg" data-i18n="loadingMenu">Loading menu...</div>
         </div>
 
-        <!-- Bottom Red Line: View All -> Opens Category / Full Menu Page -->
         <div class="view-all-wrap">
           <button class="view-all-btn" onclick="openCategoryPage('All')" data-i18n="btnViewAll">
             View All →
@@ -636,7 +784,7 @@
           <h2 class="section-title" data-i18n="myOrdersTitle">My Orders</h2>
         </div>
         <div class="glass-card" style="padding:14px 16px;" id="myOrdersBox">
-          <p style="font-size:0.84rem; color:var(--text-muted);" data-i18n="noOrders">No orders yet</p>
+          <p style="font-size:0.86rem; color:var(--text-muted);" data-i18n="noOrders">No orders yet</p>
         </div>
       </section>
 
@@ -649,7 +797,7 @@
         <div class="glass-card info-card" style="text-align:center;">
           <div style="background:var(--glass-strong); border-radius:16px; padding:24px 12px; margin-bottom:12px;">
             <div style="font-size:1.6rem; margin-bottom:6px;">📍</div>
-            <div style="font-size:0.82rem; color:var(--text-muted);">YGN TEA — Nyaungdon</div>
+            <div style="font-size:0.84rem; color:var(--text-muted);">YGN TEA</div>
           </div>
           <a id="googleMapLink" href="https://maps.app.goo.gl/hkcLcoyC56nEt3eX9" target="_blank" rel="noopener" style="text-decoration:none;">
             <button class="btn-primary" style="width:100%;" data-i18n="btnOpenMap">Open in Google Maps</button>
@@ -665,9 +813,13 @@
             <div class="info-label" data-i18n="lblHours">Opening hours</div>
             <div class="info-val" id="dispHours">Daily 6:00 AM - 10:00 PM</div>
           </div>
-          <div class="info-row" style="margin-bottom:0;">
+          <div class="info-row">
             <div class="info-label" data-i18n="lblPhone">Phone</div>
             <div class="info-val" id="dispPhone">+95 9 500 500 50</div>
+          </div>
+          <div class="info-row" style="margin-bottom:0;">
+            <div class="info-label" data-i18n="lblGmail">Gmail</div>
+            <div class="info-val" id="dispEmail">contact.ygntea@gmail.com</div>
           </div>
         </div>
       </section>
@@ -680,28 +832,25 @@
         <strong id="catPageTitle" style="color:var(--accent);">All Products</strong>
         <span></span>
       </div>
-
       <div class="cat-bar" id="pageCatBar"></div>
       <div class="menu-list" id="pageMenuList"></div>
     </section>
 
-    <!-- ==================== VIEW 3: INSIDE SHOP VIEW (POSTS, PRODUCTS, ABOUT) ==================== -->
+    <!-- ==================== VIEW 3: INSIDE SHOP VIEW ==================== -->
     <section id="shopView" class="view-section">
       <div class="glass-card back-bar">
         <button class="pill-btn" onclick="switchView('homeView')" data-i18n="btnBack">← Back</button>
-        <strong data-i18n="shopInsideTitle">🏪 YGN TEA Shop</strong>
+        <strong data-i18n="shopInsideTitle">🏪 Inside YGN TEA</strong>
         <span></span>
       </div>
 
-      <!-- About Card -->
       <div class="glass-card info-card">
         <div class="info-label" data-i18n="aboutTitle">About Our Shop</div>
         <div class="info-val" id="dispAbout">
-          ရန်ကုန်ရှယ်နှပ်လက်ဖက်ရည်နှင့် မုန့်မျိုးစုံကို လတ်ဆတ်သန့်ရှင်းစွာ နေ့စဉ် ဝန်ဆောင်မှုပေးနေပါသည်။
+          Freshly brewed tea and snacks served daily with care and quality.
         </div>
       </div>
 
-      <!-- Owner Posts Feed (Photos, Videos, Text + Like/Comment) -->
       <div class="section-header">
         <h2 class="section-title" data-i18n="shopPostsTitle">Shop Updates & Posts</h2>
       </div>
@@ -709,34 +858,61 @@
         <div class="empty-msg">No posts yet.</div>
       </div>
 
-      <!-- Full Products inside Shop -->
       <div class="section-header">
         <h2 class="section-title" data-i18n="shopProductsTitle">Our Products</h2>
       </div>
       <div class="menu-list" id="shopMenuList"></div>
     </section>
 
+    <!-- FOOTER -->
     <footer class="footer">
-      © YGN TEA · Powered by <strong>Aye Min Htet</strong>
+      <div>
+        © YGN TEA · <span data-i18n="poweredBy">Powered by</span>
+        <span class="powered-link" onclick="toggleSocialBubbles()">Aye Min Htet</span>
+      </div>
+
+      <!-- Circular Social Icons -->
+      <div id="socialBubbles" class="social-bubbles">
+        <a id="linkTiktok" class="social-circle" href="https://tiktok.com" target="_blank" rel="noopener">TT</a>
+        <a id="linkFacebook" class="social-circle" href="https://facebook.com" target="_blank" rel="noopener">FB</a>
+        <a id="linkTelegram" class="social-circle" href="https://t.me" target="_blank" rel="noopener">TG</a>
+        <a id="linkReddit" class="social-circle" href="https://reddit.com" target="_blank" rel="noopener">RD</a>
+        <a id="linkYoutube" class="social-circle" href="https://youtube.com" target="_blank" rel="noopener">YT</a>
+      </div>
+
+      <!-- Official License & Tax Compliance Notice -->
+      <div class="compliance-note" data-i18n="complianceText">
+        This shop operates with official state permissions and full tax compliance, with valid supporting business documentation and credentials maintained for our establishment.
+      </div>
     </footer>
   </div>
 
-  <!-- ==================== MODAL 1: CUSTOMER THOUGHTS WALL (TEXT + EMOJI ONLY) ==================== -->
+  <!-- Floating Quick Link Button for Owner on Any View -->
+  <button id="fabAddLink" class="fab-link-btn" onclick="openQuickLinkModal()">+ Add Link</button>
+
+  <!-- ==================== MODAL 1: CUSTOMER THOUGHTS WALL ==================== -->
   <div class="modal-backdrop" id="thoughtsModal">
     <div class="modal-box">
       <div class="modal-head">
-        <strong style="color:var(--accent);" data-i18n="thoughtsTitle">💬 ရင်ထဲကစကားများ (Customer Wall)</strong>
+        <strong style="color:var(--accent);" data-i18n="thoughtsTitle">💬 Customer Thoughts</strong>
         <button class="close-x" onclick="closeModal('thoughtsModal')">✕</button>
       </div>
 
+      <div id="activeCustBanner" class="glass-card" style="padding:10px 12px; margin-bottom:10px; display:flex; align-items:center; justify-content:space-between; gap:8px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span id="custBannerAvatar" class="avatar-mini">☕</span>
+          <span id="custBannerName" style="font-size:0.82rem; font-weight:700;">Guest Mode</span>
+        </div>
+        <button class="pill-btn" onclick="closeModal('thoughtsModal'); openCustomerModal();" data-i18n="btnProfileLogin">Login / Profile</button>
+      </div>
+
       <p style="font-size:0.76rem; color:var(--text-muted); margin-bottom:8px;" data-i18n="thoughtsRule">
-        စာသားနှင့် Emoji များသာ ရေးတင်နိုင်ပါသည် (ဓာတ်ပုံ/Link တင်ခွင့်မရှိပါ)။
+        Text and emojis only (no photos or links allowed).
       </p>
 
       <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
-        <input type="text" id="thoughtAuthor" placeholder="သင့်အမည် (Optional) e.g. Tea Lover ☕" maxlength="30" />
-        <textarea id="thoughtText" placeholder="ရင်ထဲက လာတာ စိတ်ထဲရှိတာလေးတွေ ရေးတင်ခဲ့ပါ... ✨🫖" maxlength="350"></textarea>
-        <button class="btn-primary" onclick="submitCustomerThought()" data-i18n="btnPostThought">တင်မယ် (Post)</button>
+        <textarea id="thoughtText" placeholder="Share what's on your mind... ✨🫖" maxlength="350"></textarea>
+        <button class="btn-primary" onclick="submitCustomerThought()" data-i18n="btnPostThought">Post Thought</button>
       </div>
 
       <div id="thoughtsFeedList">
@@ -745,7 +921,41 @@
     </div>
   </div>
 
-  <!-- ==================== MODAL 2: CART & TELEGRAM CHECKOUT ==================== -->
+  <!-- ==================== MODAL 2: CUSTOMER ACCOUNT & PROFILE ==================== -->
+  <div class="modal-backdrop" id="customerModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <strong style="color:var(--accent);" data-i18n="custAccTitle">👤 Customer Account & Profile</strong>
+        <button class="close-x" onclick="closeModal('customerModal')">✕</button>
+      </div>
+
+      <div id="custLoggedOutBox" style="display:flex; flex-direction:column; gap:8px;">
+        <input type="text" id="custAccName" placeholder="Your Display Name / Nickname" />
+        <input type="password" id="custAccPin" placeholder="Account PIN / Password (to restore on any phone)" />
+        <input type="text" id="custAccPhoto" placeholder="Profile Photo Direct URL (https://i.ibb.co/...)" />
+        <button class="btn-primary" onclick="loginOrRegisterCustomer()">Login / Save Account</button>
+      </div>
+
+      <div id="custLoggedInBox" style="display:none;">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+          <img id="profilePreviewImg" src="" alt="Avatar" class="avatar-mini" style="width:52px; height:52px;" onerror="this.style.display='none'" />
+          <div>
+            <div id="profilePreviewName" style="font-weight:700; font-size:0.95rem;"></div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">Synced across devices</div>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+          <input type="text" id="updatePhotoInput" placeholder="New Profile Photo URL (https://...)" />
+          <button class="btn-secondary" onclick="updateCustomerPhoto()">Update Profile Photo</button>
+          <button class="pill-btn" onclick="logoutCustomer()">Logout</button>
+        </div>
+        <div class="info-label" style="margin-bottom:6px;">My Past Thoughts</div>
+        <div id="myThoughtsHistory"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 3: CART & TELEGRAM CHECKOUT ==================== -->
   <div class="modal-backdrop" id="cartModal">
     <div class="modal-box">
       <div class="modal-head">
@@ -758,15 +968,15 @@
         <span id="cartTotal">0 Ks</span>
       </div>
       <div style="display:flex; flex-direction:column; gap:8px;">
-        <input type="text" id="custName" placeholder="Your Name / အမည်" />
-        <input type="tel" id="custPhone" placeholder="Phone Number / ဖုန်းနံပါတ်" />
-        <input type="text" id="custAddress" placeholder="Delivery Address / ပို့ရမည့်လိပ်စာ" />
+        <input type="text" id="custName" placeholder="Your Name" />
+        <input type="tel" id="custPhone" placeholder="Phone Number" />
+        <input type="text" id="custAddress" placeholder="Delivery Address" />
         <button class="btn-primary" onclick="placeOrder()" data-i18n="btnConfirmOrder">Confirm Order</button>
       </div>
     </div>
   </div>
 
-  <!-- ==================== MODAL 3: OWNER LOGIN ==================== -->
+  <!-- ==================== MODAL 4: OWNER LOGIN ==================== -->
   <div class="modal-backdrop" id="ownerModal">
     <div class="modal-box">
       <div class="modal-head">
@@ -781,15 +991,28 @@
     </div>
   </div>
 
-  <!-- Firebase SDKs & App Logic -->
+  <!-- ==================== MODAL 5: OWNER QUICK ADD LINK ==================== -->
+  <div class="modal-backdrop" id="quickLinkModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <strong style="color:var(--accent);">🔗 Add Link Button</strong>
+        <button class="close-x" onclick="closeModal('quickLinkModal')">✕</button>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <input type="text" id="modalLinkLabel" placeholder="Button Label (e.g. Special Promo)" />
+        <input type="text" id="modalLinkUrl" placeholder="Link URL (https://...)" />
+        <button class="btn-primary" onclick="saveModalQuickLink()">Save Link</button>
+      </div>
+    </div>
+  </div>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import {
-      getFirestore, collection, addDoc, getDocs, doc, setDoc, getDoc,
+      getFirestore, collection, addDoc, doc, setDoc, getDoc,
       deleteDoc, updateDoc, onSnapshot, query, orderBy, arrayUnion, increment, serverTimestamp
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    // Firebase Config (Project: ygn-tea)
     const firebaseConfig = {
       projectId: "ygn-tea",
       authDomain: "ygn-tea.firebaseapp.com",
@@ -799,22 +1022,22 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // Telegram Config
     const TG_TOKEN = "9128080140:AAHZcMANu83Q65gcwXfvI0Vu-0rKoD5ZJP4";
     const TG_CHAT_ID = "1665598519";
 
-    // App State
-    let currentLang = "my";
+    // Default English
+    let currentLang = "en";
     let isOwner = localStorage.getItem("ygntea_owner") === "true";
+    let currentCustomer = JSON.parse(localStorage.getItem("ygntea_customer") || "null");
     let allProducts = [];
+    let allThoughts = [];
+    let customLinks = [];
     let selectedHomeCat = "All";
     let selectedPageCat = "All";
     let cart = JSON.parse(localStorage.getItem("ygntea_cart") || "[]");
 
-    // Bilingual Dictionary
     const i18n = {
       en: {
-        langBtn: "မြန်မာ",
         heroTitle: "Fresh tea, made with love",
         heroSub: "Yangon's favourite milk tea, bubble tea and snacks.",
         btnThoughts: "💬 Customer Thoughts",
@@ -829,6 +1052,7 @@
         lblAddress: "Address",
         lblHours: "Opening hours",
         lblPhone: "Phone",
+        lblGmail: "Gmail",
         btnBack: "← Back",
         shopInsideTitle: "🏪 Inside YGN TEA",
         aboutTitle: "About Our Shop",
@@ -837,21 +1061,24 @@
         thoughtsTitle: "💬 Customer Thoughts",
         thoughtsRule: "Text and emojis only (no photos or links allowed).",
         btnPostThought: "Post Thought",
+        btnProfileLogin: "Login / Profile",
+        custAccTitle: "👤 Customer Account & Profile",
         cartTitle: "🛍️ Your Cart",
         totalLbl: "Total:",
         btnConfirmOrder: "Confirm Order",
         addBtn: "Add",
-        loadingMenu: "Loading menu..."
+        loadingMenu: "Loading menu...",
+        poweredBy: "Powered by",
+        complianceText: "This shop operates with official state permissions and full tax compliance, with valid supporting business documentation and credentials maintained for our establishment."
       },
       my: {
-        langBtn: "English",
         heroTitle: "မေတ္တာဖြင့် ဖျော်စပ်ထားသော လက်ဖက်ရည်",
         heroSub: "ရန်ကုန်ရှယ်နှပ်လက်ဖက်ရည်၊ Bubble Tea နှင့် မုန့်မျိုးစုံ",
         btnThoughts: "💬 ရင်ထဲကစကားများ",
         btnOrderNow: "Order now",
         btnEnterShop: "🏪 ဆိုင်ထဲ ဝင်ကြည့်မယ်",
-        menuTitle: "မီနူးများ (Menu)",
-        btnViewAll: "အားလုံးကြည့်မယ် (View All) →",
+        menuTitle: "မီနူးများ",
+        btnViewAll: "အားလုံးကြည့်မယ် →",
         myOrdersTitle: "ကျွန်ုပ်၏ အော်ဒါများ",
         noOrders: "အော်ဒါ မှာယူထားခြင်း မရှိသေးပါ",
         findUsTitle: "ဆိုင်တည်နေရာ",
@@ -859,25 +1086,240 @@
         lblAddress: "လိပ်စာ",
         lblHours: "ဆိုင်ဖွင့်ချိန်",
         lblPhone: "ဖုန်းနံပါတ်",
+        lblGmail: "Gmail",
         btnBack: "← နောက်သို့",
         shopInsideTitle: "🏪 YGN TEA ဆိုင်အတွင်းပိုင်း",
-        aboutTitle: "ဆိုင်အကြောင်း (About)",
+        aboutTitle: "ဆိုင်အကြောင်း",
         shopPostsTitle: "ဆိုင်မှ ပို့စ်များနှင့် သတင်းများ",
         shopProductsTitle: "ရရှိနိုင်သော ပစ္စည်းများ",
         thoughtsTitle: "💬 ရင်ထဲကစကားများ",
-        thoughtsRule: "စာသားနှင့် Emoji များသာ ရေးတင်နိုင်ပါသည် (ပုံနှင့် Link တင်ခွင့်မရှိပါ)။",
+        thoughtsRule: "စာသားနှင့် Emoji များသာ ရေးတင်နိုင်ပါသည် (ပုံနှင့် Link မရပါ)။",
         btnPostThought: "ရေးတင်မယ်",
+        btnProfileLogin: "Login / Profile",
+        custAccTitle: "👤 Customer အကောင့်နှင့် Profile",
         cartTitle: "🛍️ ဈေးခြင်းတောင်း",
         totalLbl: "စုစုပေါင်း:",
         btnConfirmOrder: "အော်ဒါ အတည်ပြုမယ်",
         addBtn: "ထည့်မယ်",
-        loadingMenu: "မီနူးများ ရယူနေပါသည်..."
+        loadingMenu: "မီနူးများ ရယူနေပါသည်...",
+        poweredBy: "Powered by",
+        complianceText: "ဤဆိုင်သည် နိုင်ငံတော်၏ ခွင့်ပြုချက်နှင့်အညီ အခွန်ဆောင်၍ ဖွင့်လှစ်ထားပြီး ဆိုင်အတွက် ခိုင်လုံသော ထောက်ခံအထောက်အထား အချက်အလက်များ ရှိပါသည်။"
+      },
+      ar: {
+        heroTitle: "شاي طازج محضّر بحب",
+        heroSub: "شاي بالحليب وشاي بابل ووجبات خفيفة مميزة.",
+        btnThoughts: "💬 آراء العملاء",
+        btnOrderNow: "اطلب الآن",
+        btnEnterShop: "🏪 استكشف المتجر",
+        menuTitle: "القائمة",
+        btnViewAll: "عرض الكل →",
+        myOrdersTitle: "طلباتي",
+        noOrders: "لا توجد طلبات بعد",
+        findUsTitle: "موقعنا",
+        btnOpenMap: "فتح في خرائط جوجل",
+        lblAddress: "العنوان",
+        lblHours: "ساعات العمل",
+        lblPhone: "الهاتف",
+        lblGmail: "البريد الإلكتروني",
+        btnBack: "← رجوع",
+        shopInsideTitle: "🏪 داخل متجر YGN TEA",
+        aboutTitle: "عن المتجر",
+        shopPostsTitle: "منشورات وتحديثات المتجر",
+        shopProductsTitle: "منتجاتنا",
+        thoughtsTitle: "💬 آراء العملاء",
+        thoughtsRule: "نصوص ورموز تعبيرية فقط (بدون صور أو روابط).",
+        btnPostThought: "نشر",
+        btnProfileLogin: "دخول / الملف الشخصي",
+        custAccTitle: "👤 حساب العميل والملف الشخصي",
+        cartTitle: "🛍️ سلة التسوق",
+        totalLbl: "المجموع:",
+        btnConfirmOrder: "تأكيد الطلب",
+        addBtn: "أضف",
+        loadingMenu: "جارٍ تحميل القائمة...",
+        poweredBy: "بدعم من",
+        complianceText: "يعمل هذا المتجر بتراخيص رسمية والالتزام الكامل بالضرائب مع توفر الوثائق الداعمة المعتمدة للمنشأة."
+      },
+      zh: {
+        heroTitle: "用心现泡的新鲜好茶",
+        heroSub: "美味奶茶、波霸茶与各式小食。",
+        btnThoughts: "💬 顾客心声",
+        btnOrderNow: "立即下单",
+        btnEnterShop: "🏪 走进店铺",
+        menuTitle: "菜单",
+        btnViewAll: "查看全部 →",
+        myOrdersTitle: "我的订单",
+        noOrders: "暂无订单",
+        findUsTitle: "门店位置",
+        btnOpenMap: "在 Google 地图中打开",
+        lblAddress: "地址",
+        lblHours: "营业时间",
+        lblPhone: "电话",
+        lblGmail: "邮箱",
+        btnBack: "← 返回",
+        shopInsideTitle: "🏪 YGN TEA 店内",
+        aboutTitle: "关于我们",
+        shopPostsTitle: "店铺动态与帖子",
+        shopProductsTitle: "全部商品",
+        thoughtsTitle: "💬 顾客心声",
+        thoughtsRule: "仅限文字和表情符号（不支持图片或链接）。",
+        btnPostThought: "发布",
+        btnProfileLogin: "登录 / 个人资料",
+        custAccTitle: "👤 顾客账号与资料",
+        cartTitle: "🛍️ 购物车",
+        totalLbl: "合计:",
+        btnConfirmOrder: "确认订单",
+        addBtn: "加入",
+        loadingMenu: "正在加载菜单...",
+        poweredBy: "技术支持",
+        complianceText: "本店铺已依法取得许可并按规定纳税，具备完善合规的经营证明文件。"
+      },
+      hi: {
+        heroTitle: "प्यार से बनी ताज़ा चाय",
+        heroSub: "स्वादिष्ट मिल्क टी, बबल टी और स्नैक्स।",
+        btnThoughts: "💬 ग्राहकों के विचार",
+        btnOrderNow: "अभी ऑर्डर करें",
+        btnEnterShop: "🏪 शॉप देखें",
+        menuTitle: "मेनू",
+        btnViewAll: "सभी देखें →",
+        myOrdersTitle: "मेरे ऑर्डर",
+        noOrders: "अभी कोई ऑर्डर नहीं है",
+        findUsTitle: "हमारा पता",
+        btnOpenMap: "Google Maps में खोलें",
+        lblAddress: "पता",
+        lblHours: "खुलने का समय",
+        lblPhone: "फ़ोन",
+        lblGmail: "जीमेल",
+        btnBack: "← वापस",
+        shopInsideTitle: "🏪 YGN TEA के अंदर",
+        aboutTitle: "दुकान के बारे में",
+        shopPostsTitle: "शॉप अपडेट और पोस्ट",
+        shopProductsTitle: "हमारे उत्पाद",
+        thoughtsTitle: "💬 ग्राहकों के विचार",
+        thoughtsRule: "केवल टेक्स्ट और इमोजी (फ़ोटो या लिंक की अनुमति नहीं है)।",
+        btnPostThought: "पोस्ट करें",
+        btnProfileLogin: "लॉगिन / प्रोफ़ाइल",
+        custAccTitle: "👤 कस्टमर अकाउंट और प्रोफ़ाइल",
+        cartTitle: "🛍️ आपका कार्ट",
+        totalLbl: "कुल:",
+        btnConfirmOrder: "ऑर्डर पक्का करें",
+        addBtn: "जोड़ें",
+        loadingMenu: "मेनू लोड हो रहा है...",
+        poweredBy: "संचालक",
+        complianceText: "यह दुकान सरकारी अनुमतियों और पूर्ण कर अनुपालन के साथ संचालित है, तथा संस्थान के लिए सहायक प्रमाण पत्र उपलब्ध हैं।"
+      },
+      ru: {
+        heroTitle: "Свежий чай, приготовленный с любовью",
+        heroSub: "Любимый молочный чай, бабл-ти и закуски.",
+        btnThoughts: "💬 Отзывы гостей",
+        btnOrderNow: "Заказать",
+        btnEnterShop: "🏪 В магазин",
+        menuTitle: "Меню",
+        btnViewAll: "Смотреть все →",
+        myOrdersTitle: "Мои заказы",
+        noOrders: "Заказов пока нет",
+        findUsTitle: "Как нас найти",
+        btnOpenMap: "Открыть в Google Картах",
+        lblAddress: "Адрес",
+        lblHours: "Часы работы",
+        lblPhone: "Телефон",
+        lblGmail: "Gmail",
+        btnBack: "← Назад",
+        shopInsideTitle: "🏪 Внутри YGN TEA",
+        aboutTitle: "О нас",
+        shopPostsTitle: "Новости и посты",
+        shopProductsTitle: "Наши товары",
+        thoughtsTitle: "💬 Отзывы гостей",
+        thoughtsRule: "Только текст и эмодзи (фото и ссылки запрещены).",
+        btnPostThought: "Опубликовать",
+        btnProfileLogin: "Вход / Профиль",
+        custAccTitle: "👤 Аккаунт и профиль",
+        cartTitle: "🛍️ Корзина",
+        totalLbl: "Итого:",
+        btnConfirmOrder: "Подтвердить заказ",
+        addBtn: "Добавить",
+        loadingMenu: "Загрузка меню...",
+        poweredBy: "Создано",
+        complianceText: "Магазин работает в соответствии с разрешениями и налоговыми требованиями, подтверждающие документы имеются."
+      },
+      ja: {
+        heroTitle: "心を込めて淹れたてのお茶",
+        heroSub: "ミルクティー、バブルティー、スナック。",
+        btnThoughts: "💬 みんなの声",
+        btnOrderNow: "今すぐ注文",
+        btnEnterShop: "🏪 ショップを見る",
+        menuTitle: "メニュー",
+        btnViewAll: "すべて見る →",
+        myOrdersTitle: "注文履歴",
+        noOrders: "注文はまだありません",
+        findUsTitle: "店舗情報",
+        btnOpenMap: "Google マップで開く",
+        lblAddress: "住所",
+        lblHours: "営業時間",
+        lblPhone: "電話",
+        lblGmail: "Gmail",
+        btnBack: "← 戻る",
+        shopInsideTitle: "🏪 YGN TEA 店内",
+        aboutTitle: "当店について",
+        shopPostsTitle: "ショップ投稿・お知らせ",
+        shopProductsTitle: "商品一覧",
+        thoughtsTitle: "💬 みんなの声",
+        thoughtsRule: "テキストと絵文字のみ投稿可能です（画像・リンク不可）。",
+        btnPostThought: "投稿する",
+        btnProfileLogin: "ログイン / プロフィール",
+        custAccTitle: "👤 カスタマーアカウント",
+        cartTitle: "🛍️ カート",
+        totalLbl: "合計:",
+        btnConfirmOrder: "注文を確定",
+        addBtn: "追加",
+        loadingMenu: "メニューを読み込み中...",
+        poweredBy: "制作",
+        complianceText: "当店は公的許可および納税義務を遵守して営業しており、関連する証明書類を完備しています。"
+      },
+      th: {
+        heroTitle: "ชาสดใหม่ ชงด้วยใจ",
+        heroSub: "ชานม บับเบิลที และของว่างแสนอร่อย",
+        btnThoughts: "💬 ข้อความจากลูกค้า",
+        btnOrderNow: "สั่งเลย",
+        btnEnterShop: "🏪 เข้าชมร้าน",
+        menuTitle: "เมนู",
+        btnViewAll: "ดูทั้งหมด →",
+        myOrdersTitle: "คำสั่งซื้อของฉัน",
+        noOrders: "ยังไม่มีคำสั่งซื้อ",
+        findUsTitle: "ที่ตั้งร้าน",
+        btnOpenMap: "เปิดใน Google Maps",
+        lblAddress: "ที่อยู่",
+        lblHours: "เวลาเปิด-ปิด",
+        lblPhone: "โทรศัพท์",
+        lblGmail: "Gmail",
+        btnBack: "← กลับ",
+        shopInsideTitle: "🏪 ภายในร้าน YGN TEA",
+        aboutTitle: "เกี่ยวกับร้าน",
+        shopPostsTitle: "โพสต์และอัปเดตจากร้าน",
+        shopProductsTitle: "สินค้าของเรา",
+        thoughtsTitle: "💬 ข้อความจากลูกค้า",
+        thoughtsRule: "พิมพ์ได้เฉพาะข้อความและอีโมจิเท่านั้น (ห้ามใส่รูปหรือลิงก์)",
+        btnPostThought: "โพสต์",
+        btnProfileLogin: "เข้าสู่ระบบ / โปรไฟล์",
+        custAccTitle: "👤 บัญชีและโปรไฟล์ลูกค้า",
+        cartTitle: "🛍️ ตะกร้าสินค้า",
+        totalLbl: "รวมทั้งหมด:",
+        btnConfirmOrder: "ยืนยันคำสั่งซื้อ",
+        addBtn: "เพิ่ม",
+        loadingMenu: "กำลังโหลดเมนู...",
+        poweredBy: "พัฒนาโดย",
+        complianceText: "ร้านนี้เปิดดำเนินการอย่างถูกต้องตามกฎหมายและชำระภาษีครบถ้วน โดยมีเอกสารรับรองประกอบกิจการครบถ้วน"
       }
     };
 
+    window.changeLang = function (lang) {
+      currentLang = lang;
+      document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+      applyLang();
+    };
+
     window.applyLang = function () {
-      const dict = i18n[currentLang];
-      document.getElementById("langBtn").textContent = dict.langBtn;
+      const dict = i18n[currentLang] || i18n.en;
+      document.getElementById("langSelect").value = currentLang;
       document.querySelectorAll("[data-i18n]").forEach(el => {
         const key = el.getAttribute("data-i18n");
         if (dict[key]) el.textContent = dict[key];
@@ -885,11 +1327,6 @@
       renderHomeMenu();
       renderPageMenu();
       renderShopProducts();
-    };
-
-    window.toggleLang = function () {
-      currentLang = currentLang === "my" ? "en" : "my";
-      applyLang();
     };
 
     window.toggleDarkMode = function () {
@@ -908,8 +1345,7 @@
 
     window.openCategoryPage = function (cat) {
       selectedPageCat = cat || "All";
-      document.getElementById("catPageTitle").textContent =
-        selectedPageCat === "All" ? (currentLang === "my" ? "မီနူးအားလုံး" : "All Products") : selectedPageCat;
+      document.getElementById("catPageTitle").textContent = selectedPageCat;
       renderCategoryPills("pageCatBar", selectedPageCat, (c) => {
         selectedPageCat = c;
         document.getElementById("catPageTitle").textContent = c;
@@ -919,10 +1355,17 @@
       switchView("categoryView");
     };
 
+    window.toggleSocialBubbles = function () {
+      document.getElementById("socialBubbles").classList.toggle("show");
+    };
+
     // Owner Auth
     function updateOwnerUI() {
       document.getElementById("adminDashboard").style.display = isOwner ? "block" : "none";
-      document.getElementById("loginNavBtn").textContent = isOwner ? "Admin ✓" : "Login";
+      document.getElementById("loginNavBtn").textContent = isOwner ? "Admin ✓" : "Owner";
+      document.getElementById("fabAddLink").style.display = isOwner ? "block" : "none";
+      renderThoughts();
+      renderHomeMenu();
     }
 
     window.openOwnerModal = function () {
@@ -964,8 +1407,120 @@
     };
 
     window.openThoughtsModal = function () {
+      updateCustomerBanner();
       document.getElementById("thoughtsModal").classList.add("open");
     };
+
+    window.openCustomerModal = function () {
+      renderCustomerModalState();
+      document.getElementById("customerModal").classList.add("open");
+    };
+
+    window.openQuickLinkModal = function () {
+      document.getElementById("quickLinkModal").classList.add("open");
+    };
+
+    // ==================== CUSTOMER ACCOUNT & PROFILE ====================
+    function makeCustomerDocId(name, pin) {
+      return encodeURIComponent((name.trim().toLowerCase() + "__" + pin.trim()).replace(/\s+/g, "_"));
+    }
+
+    function updateCustomerBanner() {
+      const btn = document.getElementById("custAuthBtn");
+      const av = document.getElementById("custBannerAvatar");
+      const nm = document.getElementById("custBannerName");
+
+      if (currentCustomer) {
+        btn.textContent = currentCustomer.name.slice(0, 8);
+        nm.textContent = currentCustomer.name;
+        av.innerHTML = currentCustomer.photo
+          ? `<img src="${escapeHTML(currentCustomer.photo)}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" />`
+          : "👤";
+      } else {
+        btn.textContent = "Customer";
+        nm.textContent = "Guest Mode";
+        av.innerHTML = "☕";
+      }
+    }
+
+    function renderCustomerModalState() {
+      const outBox = document.getElementById("custLoggedOutBox");
+      const inBox = document.getElementById("custLoggedInBox");
+      if (!currentCustomer) {
+        outBox.style.display = "flex";
+        inBox.style.display = "none";
+        return;
+      }
+      outBox.style.display = "none";
+      inBox.style.display = "block";
+      document.getElementById("profilePreviewName").textContent = currentCustomer.name;
+      const img = document.getElementById("profilePreviewImg");
+      if (currentCustomer.photo) {
+        img.src = currentCustomer.photo;
+        img.style.display = "inline-block";
+      } else {
+        img.style.display = "none";
+      }
+      renderMyThoughtsHistory();
+    }
+
+    window.loginOrRegisterCustomer = async function () {
+      const name = document.getElementById("custAccName").value.trim();
+      const pin = document.getElementById("custAccPin").value.trim();
+      const photo = document.getElementById("custAccPhoto").value.trim();
+      if (!name || !pin) return alert("Enter display name and PIN.");
+
+      const docId = makeCustomerDocId(name, pin);
+      const ref = doc(db, "customers", docId);
+      const snap = await getDoc(ref);
+
+      let profileData;
+      if (snap.exists()) {
+        profileData = { id: docId, ...snap.data() };
+        if (photo) {
+          await updateDoc(ref, { photo });
+          profileData.photo = photo;
+        }
+      } else {
+        profileData = { id: docId, name, photo: photo || "", createdAt: serverTimestamp() };
+        await setDoc(ref, profileData);
+      }
+
+      currentCustomer = profileData;
+      localStorage.setItem("ygntea_customer", JSON.stringify(currentCustomer));
+      updateCustomerBanner();
+      renderCustomerModalState();
+      renderThoughts();
+    };
+
+    window.updateCustomerPhoto = async function () {
+      if (!currentCustomer) return;
+      const photo = document.getElementById("updatePhotoInput").value.trim();
+      if (!photo) return;
+      await updateDoc(doc(db, "customers", currentCustomer.id), { photo });
+      currentCustomer.photo = photo;
+      localStorage.setItem("ygntea_customer", JSON.stringify(currentCustomer));
+      updateCustomerBanner();
+      renderCustomerModalState();
+      renderThoughts();
+      alert("Profile photo updated!");
+    };
+
+    window.logoutCustomer = function () {
+      currentCustomer = null;
+      localStorage.removeItem("ygntea_customer");
+      updateCustomerBanner();
+      renderCustomerModalState();
+    };
+
+    function renderMyThoughtsHistory() {
+      const box = document.getElementById("myThoughtsHistory");
+      if (!currentCustomer) return;
+      const mine = allThoughts.filter(t => t.customerId === currentCustomer.id);
+      box.innerHTML = mine.length
+        ? mine.map(m => `<div class="comment-item">${escapeHTML(m.text)}</div>`).join("")
+        : `<div class="empty-msg">No posts yet under this account.</div>`;
+    }
 
     // ==================== FIRESTORE: PRODUCTS ====================
     window.addProduct = async function () {
@@ -975,39 +1530,35 @@
       const category = document.getElementById("prodCategory").value.trim() || "Tea";
       const image = document.getElementById("prodImage").value.trim() || "🧋";
 
-      if (!nameEn || !price) return alert("Please enter product name and price.");
-
+      if (!nameEn || !price) return alert("Enter product name and price.");
       await addDoc(collection(db, "products"), {
         nameEn, nameMy, price, category, image, createdAt: serverTimestamp()
       });
-
       document.getElementById("prodNameEn").value = "";
       document.getElementById("prodNameMy").value = "";
       document.getElementById("prodPrice").value = "";
       document.getElementById("prodImage").value = "";
-      alert("Product added!");
+      alert("Product saved!");
     };
 
     window.deleteProduct = async function (id) {
       if (!isOwner) return;
-      if (confirm("Delete this product?")) {
-        await deleteDoc(doc(db, "products", id));
-      }
+      if (confirm("Delete this product?")) await deleteDoc(doc(db, "products", id));
     };
 
     function createProductCardHTML(item) {
       const title = currentLang === "my" ? (item.nameMy || item.nameEn) : item.nameEn;
       const isUrl = item.image && item.image.startsWith("http");
       const thumb = isUrl ? `<img src="${item.image}" alt="${title}">` : (item.image || "🧋");
-      const addLabel = i18n[currentLang].addBtn;
+      const addLabel = (i18n[currentLang] || i18n.en).addBtn;
 
       return `
         <div class="menu-card glass-card">
           <div class="menu-info">
             <div class="menu-thumb">${thumb}</div>
             <div class="menu-meta">
-              <span class="cat-tag" onclick="openCategoryPage('${item.category}')">${item.category}</span>
-              <h3>${title}</h3>
+              <span class="cat-tag" onclick="openCategoryPage('${escapeHTML(item.category)}')">${escapeHTML(item.category)}</span>
+              <h3>${escapeHTML(title)}</h3>
               <div class="menu-price">${Number(item.price).toLocaleString()} Ks</div>
             </div>
           </div>
@@ -1023,7 +1574,7 @@
       const cats = ["All", ...new Set(allProducts.map(p => p.category).filter(Boolean))];
       const el = document.getElementById(containerId);
       el.innerHTML = cats.map(c => `
-        <button class="cat-pill ${c === activeCat ? 'active' : ''}" data-cat="${c}">${c}</button>
+        <button class="cat-pill ${c === activeCat ? 'active' : ''}" data-cat="${escapeHTML(c)}">${escapeHTML(c)}</button>
       `).join("");
       el.querySelectorAll(".cat-pill").forEach(btn => {
         btn.onclick = () => {
@@ -1037,16 +1588,13 @@
     function renderHomeMenu() {
       const list = document.getElementById("homeMenuList");
       if (!allProducts.length) {
-        list.innerHTML = `<div class="empty-msg">${currentLang === "my" ? "ဆိုင်ရှင်မှ မီနူးများ မတင်ရသေးပါ" : "No products uploaded by owner yet."}</div>`;
+        list.innerHTML = `<div class="empty-msg">No products uploaded yet.</div>`;
         return;
       }
       const filtered = selectedHomeCat === "All"
         ? allProducts
         : allProducts.filter(p => p.category === selectedHomeCat);
-
-      // Show max 5 cards on Home
-      const limitedFive = filtered.slice(0, 5);
-      list.innerHTML = limitedFive.map(createProductCardHTML).join("");
+      list.innerHTML = filtered.slice(0, 5).map(createProductCardHTML).join("");
     }
 
     function renderPageMenu() {
@@ -1068,71 +1616,107 @@
 
     onSnapshot(query(collection(db, "products"), orderBy("createdAt", "asc")), (snap) => {
       allProducts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      renderCategoryPills("homeCatBar", selectedHomeCat, (c) => {
-        // Clicking category in Home opens Category Page directly as requested
-        openCategoryPage(c);
-      });
+      renderCategoryPills("homeCatBar", selectedHomeCat, (c) => openCategoryPage(c));
       renderHomeMenu();
       renderPageMenu();
       renderShopProducts();
     });
 
-    // ==================== FIRESTORE: SHOP INFO & GOOGLE MAP ====================
+    // ==================== FIRESTORE: SHOP INFO, LOGO, GMAIL & LINKS ====================
     window.saveShopInfo = async function () {
       const payload = {
+        logoUrl: document.getElementById("infoLogoUrl").value.trim(),
         about: document.getElementById("infoAbout").value.trim(),
         address: document.getElementById("infoAddress").value.trim(),
         hours: document.getElementById("infoHours").value.trim(),
         phone: document.getElementById("infoPhone").value.trim(),
+        email: document.getElementById("infoEmail").value.trim(),
         mapUrl: document.getElementById("infoMapUrl").value.trim() || "https://maps.app.goo.gl/hkcLcoyC56nEt3eX9"
       };
       await setDoc(doc(db, "settings", "shopInfo"), payload, { merge: true });
-      alert("Shop Info & Map updated!");
+      alert("Shop Info & Logo updated!");
+    };
+
+    window.saveSocialLinks = async function () {
+      const social = {
+        tiktok: document.getElementById("socTiktok").value.trim() || "https://tiktok.com",
+        facebook: document.getElementById("socFacebook").value.trim() || "https://facebook.com",
+        telegram: document.getElementById("socTelegram").value.trim() || "https://t.me",
+        reddit: document.getElementById("socReddit").value.trim() || "https://reddit.com",
+        youtube: document.getElementById("socYoutube").value.trim() || "https://youtube.com"
+      };
+      await setDoc(doc(db, "settings", "socialLinks"), social, { merge: true });
+      alert("Social links saved!");
+    };
+
+    window.addCustomQuickLink = async function () {
+      const label = document.getElementById("quickLinkLabel").value.trim();
+      const url = document.getElementById("quickLinkUrl").value.trim();
+      if (!label || !url) return alert("Enter link label and URL.");
+      await addDoc(collection(db, "quickLinks"), { label, url, createdAt: serverTimestamp() });
+      document.getElementById("quickLinkLabel").value = "";
+      document.getElementById("quickLinkUrl").value = "";
+      alert("Link button added!");
+    };
+
+    window.saveModalQuickLink = async function () {
+      const label = document.getElementById("modalLinkLabel").value.trim();
+      const url = document.getElementById("modalLinkUrl").value.trim();
+      if (!label || !url) return alert("Enter link label and URL.");
+      await addDoc(collection(db, "quickLinks"), { label, url, createdAt: serverTimestamp() });
+      document.getElementById("modalLinkLabel").value = "";
+      document.getElementById("modalLinkUrl").value = "";
+      closeModal("quickLinkModal");
     };
 
     onSnapshot(doc(db, "settings", "shopInfo"), (snap) => {
       if (!snap.exists()) return;
       const d = snap.data();
-      if (d.about) {
-        document.getElementById("dispAbout").textContent = d.about;
-        document.getElementById("infoAbout").value = d.about;
+      if (d.logoUrl) {
+        ["topLogoImg", "heroLogoImg"].forEach(id => {
+          const el = document.getElementById(id);
+          el.src = d.logoUrl;
+          el.style.display = id === "topLogoImg" ? "inline-block" : "block";
+        });
+        document.getElementById("infoLogoUrl").value = d.logoUrl;
       }
-      if (d.address) {
-        document.getElementById("dispAddress").textContent = d.address;
-        document.getElementById("infoAddress").value = d.address;
-      }
-      if (d.hours) {
-        document.getElementById("dispHours").textContent = d.hours;
-        document.getElementById("infoHours").value = d.hours;
-      }
-      if (d.phone) {
-        document.getElementById("dispPhone").textContent = d.phone;
-        document.getElementById("infoPhone").value = d.phone;
-      }
-      if (d.mapUrl) {
-        document.getElementById("googleMapLink").href = d.mapUrl;
-        document.getElementById("infoMapUrl").value = d.mapUrl;
-      }
+      if (d.about) { document.getElementById("dispAbout").textContent = d.about; document.getElementById("infoAbout").value = d.about; }
+      if (d.address) { document.getElementById("dispAddress").textContent = d.address; document.getElementById("infoAddress").value = d.address; }
+      if (d.hours) { document.getElementById("dispHours").textContent = d.hours; document.getElementById("infoHours").value = d.hours; }
+      if (d.phone) { document.getElementById("dispPhone").textContent = d.phone; document.getElementById("infoPhone").value = d.phone; }
+      if (d.email) { document.getElementById("dispEmail").textContent = d.email; document.getElementById("infoEmail").value = d.email; }
+      if (d.mapUrl) { document.getElementById("googleMapLink").href = d.mapUrl; document.getElementById("infoMapUrl").value = d.mapUrl; }
     });
 
-    // ==================== FIRESTORE: OWNER SHOP POSTS (PHOTO / VIDEO / TEXT) ====================
+    onSnapshot(doc(db, "settings", "socialLinks"), (snap) => {
+      if (!snap.exists()) return;
+      const s = snap.data();
+      if (s.tiktok) { document.getElementById("linkTiktok").href = s.tiktok; document.getElementById("socTiktok").value = s.tiktok; }
+      if (s.facebook) { document.getElementById("linkFacebook").href = s.facebook; document.getElementById("socFacebook").value = s.facebook; }
+      if (s.telegram) { document.getElementById("linkTelegram").href = s.telegram; document.getElementById("socTelegram").value = s.telegram; }
+      if (s.reddit) { document.getElementById("linkReddit").href = s.reddit; document.getElementById("socReddit").value = s.reddit; }
+      if (s.youtube) { document.getElementById("linkYoutube").href = s.youtube; document.getElementById("socYoutube").value = s.youtube; }
+    });
+
+    onSnapshot(query(collection(db, "quickLinks"), orderBy("createdAt", "asc")), (snap) => {
+      customLinks = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      const bar = document.getElementById("customQuickLinksBar");
+      bar.innerHTML = customLinks.map(l => `
+        <a class="custom-link-chip" href="${escapeHTML(l.url)}" target="_blank" rel="noopener">🔗 ${escapeHTML(l.label)}</a>
+      `).join("");
+    });
+
+    // ==================== FIRESTORE: SHOP POSTS ====================
     window.addOwnerPost = async function () {
       if (!isOwner) return;
       const text = document.getElementById("ownerPostText").value.trim();
       const mediaType = document.getElementById("ownerPostMediaType").value;
       const mediaUrl = document.getElementById("ownerPostMediaUrl").value.trim();
-
-      if (!text && !mediaUrl) return alert("Write a post or add media link.");
+      if (!text && !mediaUrl) return alert("Write text or add media URL.");
 
       await addDoc(collection(db, "shopPosts"), {
-        text,
-        mediaType,
-        mediaUrl,
-        likes: 0,
-        comments: [],
-        createdAt: serverTimestamp()
+        text, mediaType, mediaUrl, likes: 0, comments: [], createdAt: serverTimestamp()
       });
-
       document.getElementById("ownerPostText").value = "";
       document.getElementById("ownerPostMediaUrl").value = "";
       alert("Shop post published!");
@@ -1146,17 +1730,13 @@
       const inp = document.getElementById("sp_cmt_" + id);
       const val = inp.value.trim();
       if (!val) return;
-      await updateDoc(doc(db, "shopPosts", id), {
-        comments: arrayUnion(val)
-      });
+      await updateDoc(doc(db, "shopPosts", id), { comments: arrayUnion(val) });
       inp.value = "";
     };
 
     window.deleteShopPost = async function (id) {
       if (!isOwner) return;
-      if (confirm("Delete this shop post?")) {
-        await deleteDoc(doc(db, "shopPosts", id));
-      }
+      if (confirm("Delete this post?")) await deleteDoc(doc(db, "shopPosts", id));
     };
 
     onSnapshot(query(collection(db, "shopPosts"), orderBy("createdAt", "desc")), (snap) => {
@@ -1169,9 +1749,9 @@
         const p = d.data();
         let mediaHTML = "";
         if (p.mediaType === "image" && p.mediaUrl) {
-          mediaHTML = `<img src="${p.mediaUrl}" class="feed-media" alt="Shop post" />`;
+          mediaHTML = `<img src="${escapeHTML(p.mediaUrl)}" class="feed-media" alt="Shop post" />`;
         } else if (p.mediaType === "video" && p.mediaUrl) {
-          mediaHTML = `<video src="${p.mediaUrl}" class="feed-media" controls playsinline></video>`;
+          mediaHTML = `<video src="${escapeHTML(p.mediaUrl)}" class="feed-media" controls playsinline></video>`;
         }
         const commentsHTML = (p.comments || []).map(c => `<div class="comment-item">💬 ${escapeHTML(c)}</div>`).join("");
 
@@ -1199,7 +1779,7 @@
       }).join("");
     });
 
-    // ==================== FIRESTORE: CUSTOMER THOUGHTS (TEXT + EMOJI ONLY) ====================
+    // ==================== FIRESTORE: CUSTOMER THOUGHTS ====================
     function escapeHTML(str) {
       return String(str).replace(/[&<>"']/g, m => ({
         "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
@@ -1207,23 +1787,19 @@
     }
 
     window.submitCustomerThought = async function () {
-      const author = document.getElementById("thoughtAuthor").value.trim() || "Guest ☕";
       const text = document.getElementById("thoughtText").value.trim();
-
-      if (!text) return alert("စာသားလေး အရင်ရေးပေးပါဦးခင်ဗျာ။");
-      // Block image/URL links strictly so only text + emoji is posted
+      if (!text) return alert("Please write a message first.");
       if (/https?:\/\/|www\.|<img|data:image/i.test(text)) {
-        return alert("စာသားနှင့် Emoji များသာ တင်ခွင့်ရှိပါသည် (Link/ပုံ မရပါ)။");
+        return alert("Text and emojis only (no links or images).");
       }
 
-      await addDoc(collection(db, "customerThoughts"), {
-        author,
-        text,
-        likes: 0,
-        comments: [],
-        createdAt: serverTimestamp()
-      });
+      const author = currentCustomer ? currentCustomer.name : "Guest ☕";
+      const avatar = currentCustomer && currentCustomer.photo ? currentCustomer.photo : "";
+      const customerId = currentCustomer ? currentCustomer.id : "";
 
+      await addDoc(collection(db, "customerThoughts"), {
+        author, avatar, customerId, text, likes: 0, comments: [], createdAt: serverTimestamp()
+      });
       document.getElementById("thoughtText").value = "";
     };
 
@@ -1235,59 +1811,61 @@
       const inp = document.getElementById("th_cmt_" + id);
       const val = inp.value.trim();
       if (!val) return;
-      if (/https?:\/\/|www\./i.test(val)) return alert("Link ထည့်ခွင့်မရှိပါ။");
-      await updateDoc(doc(db, "customerThoughts", id), {
-        comments: arrayUnion(val)
-      });
+      if (/https?:\/\/|www\./i.test(val)) return alert("Links are not allowed.");
+      await updateDoc(doc(db, "customerThoughts", id), { comments: arrayUnion(val) });
       inp.value = "";
     };
 
     window.deleteThought = async function (id) {
-      // ONLY Owner/Admin can delete
       if (!isOwner) return;
-      if (confirm("Delete this customer post?")) {
-        await deleteDoc(doc(db, "customerThoughts", id));
-      }
+      if (confirm("Delete this customer post?")) await deleteDoc(doc(db, "customerThoughts", id));
     };
 
-    onSnapshot(query(collection(db, "customerThoughts"), orderBy("createdAt", "desc")), (snap) => {
+    function renderThoughts() {
       const box = document.getElementById("thoughtsFeedList");
-      if (snap.empty) {
-        box.innerHTML = `<div class="empty-msg">ရင်ထဲကစကားလေးတွေ ပထမဆုံး ရေးတင်လိုက်ပါ ✨</div>`;
+      if (!allThoughts.length) {
+        box.innerHTML = `<div class="empty-msg">No thoughts posted yet. Be the first! ✨</div>`;
         return;
       }
-      box.innerHTML = snap.docs.map(d => {
-        const t = d.data();
+      box.innerHTML = allThoughts.map(t => {
         const commentsHTML = (t.comments || []).map(c => `<div class="comment-item">💭 ${escapeHTML(c)}</div>`).join("");
+        const avatarHTML = t.avatar
+          ? `<img src="${escapeHTML(t.avatar)}" class="avatar-mini" alt="avatar" />`
+          : `<span class="avatar-mini">👤</span>`;
 
         return `
           <div class="glass-card feed-card">
             <div class="feed-header">
-              <span class="feed-author">👤 ${escapeHTML(t.author || "Guest")}</span>
-              ${isOwner ? `<button class="del-btn" onclick="deleteThought('${d.id}')">Delete</button>` : ""}
+              <span class="feed-author">${avatarHTML} ${escapeHTML(t.author || "Guest")}</span>
+              ${isOwner ? `<button class="del-btn" onclick="deleteThought('${t.id}')">Delete</button>` : ""}
             </div>
             <div class="feed-text">${escapeHTML(t.text)}</div>
             <div class="feed-actions">
-              <button class="react-btn" onclick="likeThought('${d.id}')">❤️ ${t.likes || 0}</button>
+              <button class="react-btn" onclick="likeThought('${t.id}')">❤️ ${t.likes || 0}</button>
               <span style="font-size:0.76rem; color:var(--text-muted);">💬 ${(t.comments || []).length}</span>
             </div>
             <div class="comment-box">
               ${commentsHTML}
               <div class="comment-form">
-                <input type="text" id="th_cmt_${d.id}" placeholder="Comment ရေးရန်..." maxlength="200" />
-                <button class="pill-btn" onclick="commentThought('${d.id}')">Send</button>
+                <input type="text" id="th_cmt_${t.id}" placeholder="Write a comment..." maxlength="200" />
+                <button class="pill-btn" onclick="commentThought('${t.id}')">Send</button>
               </div>
             </div>
           </div>
         `;
       }).join("");
+    }
+
+    onSnapshot(query(collection(db, "customerThoughts"), orderBy("createdAt", "desc")), (snap) => {
+      allThoughts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      renderThoughts();
+      renderMyThoughtsHistory();
     });
 
     // ==================== CART & TELEGRAM ORDER ====================
     function saveCart() {
       localStorage.setItem("ygntea_cart", JSON.stringify(cart));
-      const count = cart.reduce((s, i) => s + i.qty, 0);
-      document.getElementById("cartCount").textContent = count;
+      document.getElementById("cartCount").textContent = cart.reduce((s, i) => s + i.qty, 0);
     }
 
     window.addToCart = function (prodId) {
@@ -1318,7 +1896,7 @@
           return `
             <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--glass-border);">
               <div>
-                <div style="font-weight:700; font-size:0.86rem;">${item.name}</div>
+                <div style="font-weight:700; font-size:0.86rem;">${escapeHTML(item.name)}</div>
                 <div style="font-size:0.76rem; color:var(--text-muted);">${item.price.toLocaleString()} Ks × ${item.qty}</div>
               </div>
               <div style="display:flex; gap:6px; align-items:center;">
@@ -1343,7 +1921,6 @@
 
       const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
       const summary = cart.map(i => `• ${i.name} x${i.qty} (${(i.price * i.qty).toLocaleString()} Ks)`).join("\n");
-
       const msg = `🫖 *NEW YGN TEA ORDER*\n👤 Name: ${name}\n📞 Phone: ${phone}\n📍 Address: ${address || "-"}\n\n${summary}\n\n💰 *Total: ${total.toLocaleString()} Ks*`;
 
       try {
@@ -1361,7 +1938,7 @@
       document.getElementById("myOrdersBox").innerHTML = `
         <div style="font-size:0.84rem;">
           <strong>✅ Last Order (${total.toLocaleString()} Ks)</strong>
-          <div style="color:var(--text-muted); margin-top:4px; white-space:pre-line;">${summary}</div>
+          <div style="color:var(--text-muted); margin-top:4px; white-space:pre-line;">${escapeHTML(summary)}</div>
         </div>
       `;
 
@@ -1373,6 +1950,7 @@
 
     // Init
     updateOwnerUI();
+    updateCustomerBanner();
     saveCart();
     applyLang();
   </script>
