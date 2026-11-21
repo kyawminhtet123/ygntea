@@ -1080,14 +1080,14 @@
       <!-- Customer Sign Up -->
       <div id="paneCustSignup" style="display:none; flex-direction:column; gap:8px;">
         <input type="text" id="cSignupNick" data-i18n-ph="phNickname" placeholder="Nickname" oninput="autoGenerateUsername()" />
-        <input type="text" id="cSignupUser" data-i18n-ph="phUniqueUser" placeholder="Unique Username (a-z, 0-9, !@#$%)" />
+        <input type="text" id="cSignupUser" data-i18n-ph="phUniqueUser" placeholder="Username (a-z, 0-9)" />
         <div style="font-size:0.7rem; color:var(--text-muted);" data-i18n="userRuleHint">Auto-generated from Nickname or customize (unique).</div>
 
         <div style="position:relative;">
-          <input type="password" id="cSignupPass" data-i18n-ph="phStrongPass" placeholder="Password (6+ chars: a-z, A-Z, 0-9, symbol)" />
+          <input type="password" id="cSignupPass" data-i18n-ph="phStrongPass" placeholder="Password (4+ characters)" />
           <button type="button" class="pill-btn" style="position:absolute; right:6px; top:50%; transform:translateY(-50%);" onclick="togglePassVisibility('cSignupPass', this)">Show</button>
         </div>
-        <div style="font-size:0.7rem; color:var(--text-muted);" data-i18n="passRuleHint">6+ chars with lowercase, uppercase, number, special char; no Nickname/Username inside.</div>
+        <div style="font-size:0.7rem; color:var(--text-muted);" data-i18n="passRuleHint">4+ characters</div>
 
         <label style="font-size:0.76rem; font-weight:700;" data-i18n="directPhotoLbl">Profile Photo (Direct Upload)</label>
         <input type="file" accept="image/*" id="cSignupPhotoFile" onchange="handleDirectImageUpload(event, 'signup')" />
@@ -1207,7 +1207,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import {
       getFirestore, collection, addDoc, doc, setDoc, getDoc, getDocs,
-      deleteDoc, updateDoc, onSnapshot, query, orderBy, arrayUnion, arrayRemove, serverTimestamp
+      deleteDoc, updateDoc, onSnapshot, query, orderBy, where, arrayUnion, arrayRemove, serverTimestamp
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -1219,8 +1219,15 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    const TG_TOKEN = "9128080140:AAHZcMANu83Q65gcwXfvI0Vu-0rKoD5ZJP4";
-    const TG_CHAT_ID = "1665598519";
+    // Security: Put your Cloudflare Worker / Cloud Function relay URL here instead of exposing a bot token in HTML
+    const TG_RELAY_URL = "https://ygn-tea-tg.www-lastblood123.workers.dev/";
+    // SHA-256 hash of default owner password ("ygntea123")
+    const OWNER_PASS_SHA256 = "67c6a105a4be8b3fd3f0793884d3a7e158e13a9705f5d1555c78e0a1ef9922c6";
+
+    async function sha256Hex(str) {
+      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
 
     // State
     let currentLang = "en";
@@ -1234,6 +1241,9 @@
     let allThoughts = [];
     let allMembers = [];
     let allFriendEdges = [];
+    let memberErr = false;
+    let unsubInbox = null;
+    let unsubOrders = null;
     let shopSettings = { singleLinkLabel: "Link", singleLinkUrl: "" };
     let selectedHomeCat = "All";
     let selectedPageCat = "All";
@@ -1328,7 +1338,7 @@
         tabSignup: "Sign Up",
         tabOwner: "Owner",
         userRuleHint: "Auto-generated from Nickname or customize (unique).",
-        passRuleHint: "6+ chars with lowercase, uppercase, number, special char; no Nickname/Username inside.",
+        passRuleHint: "4+ characters",
         btnCreateAcc: "Create Account",
         thoughtsHubTitle: "💬 Customer Thoughts & Community",
         subNotes: "Notes",
@@ -1346,8 +1356,8 @@
         phUsername: "Username",
         phPassword: "Password",
         phNickname: "Nickname",
-        phUniqueUser: "Unique Username (a-z, 0-9, !@#$%)",
-        phStrongPass: "Password (6+ chars: a-z, A-Z, 0-9, symbol)",
+        phUniqueUser: "Username (a-z, 0-9)",
+        phStrongPass: "Password (4+ characters)",
         writeNotePh: "Write a thought / note... ✨",
         phMessage: "Type message...",
         phName: "Your Name",
@@ -1391,7 +1401,7 @@
         tabSignup: "Sign Up",
         tabOwner: "Owner",
         userRuleHint: "Nickname မှ အလိုအလျောက် ဖန်တီးပေးသည် သို့မဟုတ် သီးသန့် Username ရေးပါ။",
-        passRuleHint: "အနည်းဆုံး ၆ လုံး၊ စာလုံးသေး/ကြီး၊ နံပါတ်၊ သင်္ကေတ ပါရမည်။ Nickname/Username မပါရပါ။",
+        passRuleHint: "4+ characters",
         btnCreateAcc: "အကောင့်ဖွင့်မယ်",
         thoughtsHubTitle: "💬 Customer Thoughts & Community",
         subNotes: "Notes",
@@ -1409,8 +1419,8 @@
         phUsername: "Username",
         phPassword: "Password",
         phNickname: "Nickname",
-        phUniqueUser: "Username (a-z, 0-9, !@#$%)",
-        phStrongPass: "Password (6+ chars: a-z, A-Z, 0-9, symbol)",
+        phUniqueUser: "Username (a-z, 0-9)",
+        phStrongPass: "Password (4+ characters)",
         writeNotePh: "စိတ်ထဲရှိတာလေး ရေးတင်ပါ... ✨",
         phMessage: "စာရိုက်ပါ...",
         phName: "သင့်အမည်",
@@ -1820,7 +1830,7 @@
           ? `<img src="${escapeHTML(currentUser.photo)}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" />`
           : "👤";
         document.getElementById("topUserName").textContent = currentUser.nickname;
-        sideChatBtn.style.display = "none";
+        sideChatBtn.style.display = "block";
       } else {
         authBtn.style.display = "inline-block";
         profSlot.style.display = "none";
@@ -1853,38 +1863,28 @@
 
     window.autoGenerateUsername = function () {
       const nick = document.getElementById("cSignupNick").value.trim().toLowerCase().replace(/[^a-z0-9]/g, "") || "tea";
-      const randNum = Math.floor(100 + Math.random() * 900);
-      const specials = ["!", "@", "#", "$", "_"];
-      const sp = specials[Math.floor(Math.random() * specials.length)];
-      document.getElementById("cSignupUser").value = `${nick.slice(0, 8)}${randNum}${sp}`;
+      document.getElementById("cSignupUser").value = nick.slice(0, 10) + Math.floor(100 + Math.random() * 900);
     };
 
     function validateUsernameRule(u) {
-      return /^[a-z0-9!@#$%^&*_+\-=]{4,24}$/.test(u) && /[a-z]/.test(u) && /[0-9]/.test(u) && /[^a-z0-9]/.test(u);
+      return /^[a-z0-9_.\-]{3,24}$/.test(u);
     }
 
-    function validatePasswordRule(p, nick, user) {
-      if (p.length < 6) return "Password must be at least 6 characters.";
-      if (!/[a-z]/.test(p) || !/[A-Z]/.test(p) || !/[0-9]/.test(p) || !/[^a-zA-Z0-9]/.test(p)) {
-        return "Password needs lowercase, uppercase, number, and special character.";
-      }
-      const lowP = p.toLowerCase();
-      if ((nick && lowP.includes(nick.toLowerCase())) || (user && lowP.includes(user.toLowerCase()))) {
-        return "Password must not contain your Nickname or Username.";
-      }
-      return null;
+    function validatePasswordRule(p) {
+      return p.length < 4 ? "Password must be at least 4 characters." : null;
     }
 
     window.customerSignup = async function () {
       const nick = document.getElementById("cSignupNick").value.trim();
-      const user = document.getElementById("cSignupUser").value.trim();
+      let user = document.getElementById("cSignupUser").value.trim().toLowerCase();
+      if (!user && nick) { autoGenerateUsername(); user = document.getElementById("cSignupUser").value.trim().toLowerCase(); }
       const pass = document.getElementById("cSignupPass").value;
 
       if (!nick) return alert("Enter Nickname.");
       if (!validateUsernameRule(user)) {
-        return alert("Username must be unique and include lowercase letter, number, and special character (e.g. aung123!).");
+        return alert("Username: 3-24 characters, a-z 0-9 _ . - only (e.g. aung123).");
       }
-      const err = validatePasswordRule(pass, nick, user);
+      const err = validatePasswordRule(pass);
       if (err) return alert(err);
 
       const userRef = doc(db, "customers", user);
@@ -1895,6 +1895,7 @@
       await setDoc(userRef, data);
       currentUser = data;
       pendingSignupPhoto = "";
+      if (savedOrders.length) persistSaved();
       localStorage.setItem("ygntea_user", JSON.stringify(currentUser));
       syncAuthUI();
       closeModal("authModal");
@@ -1902,25 +1903,29 @@
     };
 
     window.customerLogin = async function () {
-      const user = document.getElementById("cLoginUser").value.trim();
+      const rawUser = document.getElementById("cLoginUser").value.trim();
+      const user = rawUser.toLowerCase();
       const pass = document.getElementById("cLoginPass").value;
       if (!user || !pass) return alert("Enter username and password.");
 
-      const snap = await getDoc(doc(db, "customers", user));
+      let snap = await getDoc(doc(db, "customers", user));
+      if (!snap.exists() && rawUser !== user) snap = await getDoc(doc(db, "customers", rawUser));
       if (!snap.exists() || snap.data().password !== pass) {
         return alert("Invalid username or password.");
       }
       currentUser = snap.data();
       localStorage.setItem("ygntea_user", JSON.stringify(currentUser));
+      await loadAccountData();
       syncAuthUI();
       closeModal("authModal");
       openProfilePage();
     };
 
-    window.ownerLogin = function () {
+    window.ownerLogin = async function () {
       const u = document.getElementById("oLoginUser").value.trim();
       const p = document.getElementById("oLoginPass").value.trim();
-      if (u === "owner" && p === "ygntea123") {
+      const digest = await sha256Hex(p);
+      if (u.toLowerCase() === "owner" && digest === OWNER_PASS_SHA256) {
         isOwner = true;
         currentUser = null;
         localStorage.setItem("ygntea_owner", "true");
@@ -1950,6 +1955,7 @@
         oCard.style.display = "block";
         document.getElementById("profileViewTitle").textContent = "Owner Profile";
         renderOwnerInbox();
+        watchOrders("ownerProfileCard", query(collection(db, "orders")), true);
       } else if (currentUser) {
         oCard.style.display = "none";
         cCard.style.display = "block";
@@ -1960,6 +1966,7 @@
           ? `<img src="${escapeHTML(currentUser.photo)}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" onclick="openPhotoPeek(this.src, '${escapeHTML(currentUser.nickname)}')" />`
           : "👤";
         renderMyNotes();
+        watchOrders("customerProfileCard", query(collection(db, "orders"), where("username", "==", currentUser.username)), false);
       } else {
         openAuthModal();
         return;
@@ -1968,6 +1975,45 @@
     };
 
     // ==================== WATER-DROP ORDER TOAST & SAVED ORDERS ====================
+    function persistSaved() {
+      localStorage.setItem("ygntea_saved_orders", JSON.stringify(savedOrders));
+      updateSavedBadge();
+      if (currentUser) updateDoc(doc(db, "customers", currentUser.username), { savedOrders }).catch(() => {});
+    }
+
+    async function loadAccountData() {
+      if (!currentUser) return;
+      try {
+        const sn = await getDoc(doc(db, "customers", currentUser.username));
+        if (sn.exists()) {
+          const d = sn.data();
+          currentUser = { ...currentUser, ...d };
+          localStorage.setItem("ygntea_user", JSON.stringify(currentUser));
+          const remote = Array.isArray(d.savedOrders) ? d.savedOrders : [];
+          if (remote.length) savedOrders = remote;
+          persistSaved();
+        }
+      } catch (e) { console.error(e); }
+      syncAuthUI();
+    }
+
+    function orderRow(o, who) {
+      const dt = o.createdAt && o.createdAt.toDate ? o.createdAt.toDate().toLocaleString() : "";
+      const items = (o.items || []).map(i => escapeHTML(i.name)).join(", ");
+      return `<div class="reply-item"><div style="font-size:0.72rem;color:var(--text-muted);">${escapeHTML(dt)}${who ? " · " + escapeHTML(o.name || "") + " " + escapeHTML(o.phone || "") : ""}</div><div>${items}</div><strong>${Number(o.total || 0).toLocaleString()} Ks</strong></div>`;
+    }
+
+    function watchOrders(cardId, q, who) {
+      const card = document.getElementById(cardId);
+      let box = document.getElementById("orderHistoryBox_" + cardId);
+      if (!box) { box = document.createElement("div"); box.id = "orderHistoryBox_" + cardId; box.style.marginTop = "14px"; card.appendChild(box); }
+      if (unsubOrders) unsubOrders();
+      unsubOrders = onSnapshot(q, (snap) => {
+        const rows = snap.docs.map(d => d.data()).sort((a, b) => ((b.createdAt && b.createdAt.seconds) || 0) - ((a.createdAt && a.createdAt.seconds) || 0));
+        box.innerHTML = `<strong>🧾 Orders</strong>` + (rows.length ? rows.map(o => orderRow(o, who)).join("") : `<div class="empty-msg">-</div>`);
+      }, () => {});
+    }
+
     function updateSavedBadge() {
       document.getElementById("savedOrderBadge").textContent = "📌 " + savedOrders.length;
     }
@@ -1997,8 +2043,7 @@
         price: Number(pendingOrderItem.price),
         qty: 1
       });
-      localStorage.setItem("ygntea_saved_orders", JSON.stringify(savedOrders));
-      updateSavedBadge();
+      persistSaved();
       hideWaterToast();
     };
 
@@ -2010,8 +2055,7 @@
         price: Number(pendingOrderItem.price),
         qty: 1
       });
-      localStorage.setItem("ygntea_saved_orders", JSON.stringify(savedOrders));
-      updateSavedBadge();
+      persistSaved();
       hideWaterToast();
       openSavedOrdersModal();
     };
@@ -2042,8 +2086,7 @@
 
     window.removeSavedItem = function (idx) {
       savedOrders.splice(idx, 1);
-      localStorage.setItem("ygntea_saved_orders", JSON.stringify(savedOrders));
-      updateSavedBadge();
+      persistSaved();
       openSavedOrdersModal();
     };
 
@@ -2058,18 +2101,19 @@
       const summary = savedOrders.map(i => `• ${i.name} (${i.price.toLocaleString()} Ks)`).join("\n");
       const msg = `🫖 *NEW YGN TEA ORDER*\n👤 Name: ${name}\n📞 Phone: ${phone}\n📍 Address: ${address || "-"}\n\n${summary}\n\n💰 *Total: ${total.toLocaleString()} Ks*`;
 
-      try {
-        await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ chat_id: TG_CHAT_ID, text: msg, parse_mode: "Markdown" })
-        });
-      } catch (e) { console.error(e); }
+      if (TG_RELAY_URL) {
+        try {
+          await fetch(TG_RELAY_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text: msg })
+          });
+        } catch (e) { console.error(e); }
+      }
 
-      await addDoc(collection(db, "orders"), { name, phone, address, items: savedOrders, total, createdAt: serverTimestamp() });
+      await addDoc(collection(db, "orders"), { name, phone, address, items: savedOrders, total, username: currentUser ? currentUser.username : "", createdAt: serverTimestamp() });
       savedOrders = [];
-      localStorage.setItem("ygntea_saved_orders", "[]");
-      updateSavedBadge();
+      persistSaved();
       closeModal("savedOrdersModal");
       alert("✓");
     };
@@ -2214,12 +2258,14 @@
     setInterval(rotateRandomThought, 2000);
 
     window.openThoughtsHubModal = function () {
+      document.getElementById("thoughtsHubModal").classList.add("open");
+      try {
       syncAuthUI();
       switchHubSub("hubNotesPane");
       renderThoughtsOverview();
       renderFriendsHub();
       renderFriendChatSelect();
-      document.getElementById("thoughtsHubModal").classList.add("open");
+      } catch (e) { console.error(e); }
     };
 
     window.switchHubSub = function (paneId) {
@@ -2384,22 +2430,23 @@
 
     // ==================== MEMBERS, FRIEND ADD/UNFRIEND/BLOCK & FRIEND CHAT ====================
     onSnapshot(collection(db, "customers"), (snap) => {
+      memberErr = false;
       allMembers = snap.docs.map(d => ({ id: d.id, ...d.data() }));
       renderFriendsHub();
       renderFriendChatSelect();
-    });
+    }, (err) => { console.error(err); memberErr = true; renderFriendsHub(); });
 
     onSnapshot(collection(db, "friendEdges"), (snap) => {
       allFriendEdges = snap.docs.map(d => ({ id: d.id, ...d.data() }));
       renderFriendsHub();
       renderFriendChatSelect();
-    });
+    }, (err) => console.error(err));
 
     function edgeDocId(a, b) { return [a, b].sort().join("__"); }
     function getEdgeBetween(a, b) { return allFriendEdges.find(e => e.id === edgeDocId(a, b)) || null; }
 
     window.sendFriendRequest = async function (targetUser) {
-      if (!currentUser) return alert(i18n[currentLang]?.accountRequiredMsg || "Account required.");
+      if (!currentUser) { closeModal("thoughtsHubModal"); return openAuthModal(); }
       if (targetUser === currentUser.username) return;
       await setDoc(doc(db, "friendEdges", edgeDocId(currentUser.username, targetUser)), {
         users: [currentUser.username, targetUser],
@@ -2431,9 +2478,20 @@
     function renderFriendsHub() {
       const reqBox = document.getElementById("friendRequestsBox");
       const memBox = document.getElementById("allMembersList");
+      if (memberErr) {
+        reqBox.innerHTML = "";
+        memBox.innerHTML = `<div class="empty-msg">⚠ Members could not be loaded. Please check Firestore rules (allow read on customers, friendEdges).</div>`;
+        return;
+      }
       if (!currentUser) {
         reqBox.innerHTML = "";
-        memBox.innerHTML = `<div class="empty-msg">${escapeHTML((i18n[currentLang] || i18n.en).accountRequiredMsg)}</div>`;
+        const loginBtn = isOwner ? "" : `<button class="pill-btn" onclick="closeModal('thoughtsHubModal'); openAuthModal();">+ Friend</button>`;
+        memBox.innerHTML = allMembers.length ? allMembers.map(m => {
+          const av = m.photo ? `<img src="${escapeHTML(m.photo)}" class="avatar-mini" />` : `<span class="avatar-mini">👤</span>`;
+          return `<div class="glass-card feed-card" style="display:flex; justify-content:space-between; align-items:center; gap:8px; padding:10px 12px;">
+            <div class="feed-author" onclick="openMemberProfile('${escapeHTML(m.username)}')">${av}<div><div>${escapeHTML(m.nickname)}</div><small style="color:var(--text-muted);">@${escapeHTML(m.username)}</small></div></div>
+            ${loginBtn}</div>`;
+        }).join("") : `<div class="empty-msg">-</div>`;
         return;
       }
 
@@ -2574,8 +2632,22 @@
     }
 
     let unsubOwnerChat = null;
+    function showOwnerInbox() {
+      const mb = document.querySelector("#ownerChatModal .modal-box");
+      let inbox = document.getElementById("ownerChatInbox");
+      if (!inbox) { inbox = document.createElement("div"); inbox.id = "ownerChatInbox"; inbox.style.marginBottom = "8px"; mb.insertBefore(inbox, document.getElementById("ownerChatThread")); }
+      document.getElementById("ownerChatThread").innerHTML = `<div class="empty-msg">Select a customer 👆</div>`;
+      if (unsubInbox) unsubInbox();
+      unsubInbox = onSnapshot(collection(db, "ownerChatThreads"), (snap) => {
+        const rows = snap.docs.map(d => d.data()).sort((a, b) => ((b.updatedAt && b.updatedAt.seconds) || 0) - ((a.updatedAt && a.updatedAt.seconds) || 0));
+        inbox.innerHTML = rows.length ? rows.map(t => `<div class="reply-item" style="display:flex; justify-content:space-between; align-items:center;"><strong>${escapeHTML(t.label || t.accountKey)}</strong><button class="pill-btn" onclick="openSpecificThreadForOwner('${escapeHTML(t.accountKey)}')">Open</button></div>`).join("") : `<div class="empty-msg">-</div>`;
+      }, () => {});
+    }
+
     window.openOwnerChatModal = function () {
       syncAuthUI();
+      const ib = document.getElementById("ownerChatInbox"); if (ib) ib.innerHTML = "";
+      if (unsubInbox && !isOwner) { unsubInbox(); unsubInbox = null; }
       const box = document.getElementById("ownerChatThread");
       if (unsubOwnerChat) { unsubOwnerChat(); unsubOwnerChat = null; }
 
@@ -2585,7 +2657,8 @@
         return;
       }
 
-      const accKey = isOwner ? null : getOwnerChatAccountKey();
+      if (isOwner) { showOwnerInbox(); document.getElementById("ownerChatModal").classList.add("open"); return; }
+      const accKey = getOwnerChatAccountKey();
       if (accKey) {
         unsubOwnerChat = onSnapshot(query(collection(db, "ownerChats", accKey, "messages"), orderBy("createdAt", "asc")), (snap) => {
           box.innerHTML = snap.docs.map(d => {
@@ -2673,6 +2746,7 @@
         await addDoc(collection(db, "ownerChats", accKey, "messages"), {
           fromOwner: true, senderLabel: "Owner", text: txt, image: photoData || "", createdAt: serverTimestamp()
         });
+        await setDoc(doc(db, "ownerChatThreads", accKey), { updatedAt: serverTimestamp() }, { merge: true });
         inp.value = "";
       };
       document.getElementById("ownerChatModal").classList.add("open");
@@ -2803,6 +2877,7 @@
     // Init
     syncAuthUI();
     applyLang();
+    loadAccountData();
   </script>
 </body>
 </html>
