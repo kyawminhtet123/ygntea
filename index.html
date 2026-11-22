@@ -2764,7 +2764,7 @@ function isSafeUrl(url) {
     // ==================== SHOP SETTINGS, SINGLE LINK & SOCIAL LINKS ====================
     function applyShopDisplayFromSettings() {
       const d = shopSettings;
-      if (d.logoUrl) {
+      if (d.logoUrl && isSafeUrl(d.logoUrl)) {
         ["topLogoImg", "heroLogoImg"].forEach(id => {
           const el = document.getElementById(id);
           el.src = d.logoUrl;
