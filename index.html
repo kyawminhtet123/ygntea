@@ -1798,11 +1798,20 @@
     };
 
     function escapeHTML(str) {
+      
       return String(str || "").replace(/[&<>"']/g, m => ({
         "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
       }[m]));
     }
-
+function isSafeUrl(url) {
+      if (!url) return false;
+      try {
+        const parsed = new URL(url);
+        return parsed.protocol === "https:" || parsed.protocol === "http:";
+      } catch {
+        return false;
+      }
+    } 
     // ==================== UNIFIED AUTH + PROFILE PAGE LOGOUT ====================
     function syncAuthUI() {
       const authBtn = document.getElementById("unifiedAuthBtn");
@@ -2767,11 +2776,11 @@
       if (d.hours) document.getElementById("dispHours").textContent = d.hours;
       if (d.phone) document.getElementById("dispPhone").textContent = d.phone;
       if (d.email) document.getElementById("dispEmail").textContent = d.email;
-      if (d.mapUrl) document.getElementById("googleMapLink").href = d.mapUrl;
+      if (d.mapUrl && isSafeUrl(d.mapUrl)) document.getElementById("googleMapLink").href = d.mapUrl;
 
       const homeLinkWrap = document.getElementById("homeSingleLinkBtn");
       const homeLinkText = document.getElementById("homeSingleLinkText");
-      if (d.singleLinkUrl) {
+      if (d.singleLinkUrl && isSafeUrl(d.singleLinkUrl)) {
         homeLinkWrap.href = d.singleLinkUrl;
         homeLinkText.textContent = "🔗 " + (d.singleLinkLabel || "Link");
         homeLinkWrap.style.display = "inline-block";
