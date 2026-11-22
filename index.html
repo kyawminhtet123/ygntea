@@ -2151,7 +2151,7 @@ function isSafeUrl(url) {
 
     function buildProductCard(item) {
       const title = currentLang === "my" ? (item.nameMy || item.nameEn) : item.nameEn;
-      const isUrl = item.image && item.image.startsWith("http");
+      const isUrl = item.image && isSafeUrl(item.image);
       const thumb = isUrl
         ? `<img src="${escapeHTML(item.image)}" alt="${escapeHTML(title)}" onclick="openPhotoPeek(this.src, '${escapeHTML(title)}')">`
         : (item.image || "🧋");
@@ -2865,9 +2865,9 @@ function isSafeUrl(url) {
       box.innerHTML = snap.docs.map(d => {
         const p = d.data();
         let media = "";
-        if (p.mediaType === "image" && p.mediaUrl) {
+        if (p.mediaType === "image" && p.mediaUrl && isSafeUrl(p.mediaUrl)) {
           media = `<img src="${escapeHTML(p.mediaUrl)}" class="feed-media" onclick="openPhotoPeek(this.src, 'Shop Post')" />`;
-        } else if (p.mediaType === "video" && p.mediaUrl) {
+        } else if (p.mediaType === "video" && p.mediaUrl && isSafeUrl(p.mediaUrl)) {
           media = `<video src="${escapeHTML(p.mediaUrl)}" class="feed-media" controls playsinline></video>`;
         }
         return `
