@@ -1369,7 +1369,7 @@
  const TG_RELAY_URL = "https://ygn-tea-tg.www-lastblood123.workers.dev/";
 
  // >>> PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BELOW (for sending 6-digit Email Verification Code)
- const EMAIL_OTP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxS1o3RR_Vby7LcmR8ccPC_J66sZTUzllKPkg6MRULodYxF41OqxyUEKwHE7vOHIWfOWw/exec";
+ const EMAIL_OTP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzMEcpehNze9fH0aimlPR7Spq_YQ_Mhjmh-uRWhDDToRRp27u1U_2mBpR0X1A27yxwfpQ/exec";
 
  let auth = null;
  try {
@@ -2284,11 +2284,8 @@
  btn.textContent = "...";
 
  try {
- const res = await fetch(EMAIL_OTP_SCRIPT_URL, {
- method: "POST",
- headers: { "Content-Type": "text/plain;charset=utf-8" },
- body: JSON.stringify({ action: "send", email })
- });
+ const url = `${EMAIL_OTP_SCRIPT_URL}?action=send&email=${encodeURIComponent(email)}`;
+ const res = await fetch(url, { method: "GET", redirect: "follow" });
  const data = await res.json();
  if (!data.ok) {
  btn.disabled = false;
@@ -2327,11 +2324,8 @@
 
  try {
  // 1. Verify OTP via Google Apps Script
- const vRes = await fetch(EMAIL_OTP_SCRIPT_URL, {
- method: "POST",
- headers: { "Content-Type": "text/plain;charset=utf-8" },
- body: JSON.stringify({ action: "verify", email, code })
- });
+ const vUrl = `${EMAIL_OTP_SCRIPT_URL}?action=verify&email=${encodeURIComponent(email)}&code=${encodeURIComponent(code)}`;
+ const vRes = await fetch(vUrl, { method: "GET", redirect: "follow" });
  const vData = await vRes.json();
  if (!vData.ok) {
  btn.disabled = false;
