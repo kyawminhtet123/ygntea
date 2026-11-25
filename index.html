@@ -862,7 +862,7 @@
  🏪 Explore Shop
  </button>
  <a id="homeSingleLinkBtn" href="" target="_blank" rel="noopener" style="display:none; text-decoration:none;">
- <button type="button" class="btn-secondary" id="homeSingleLinkText">➜] Tap-Here</button>
+ <button type="button" class="btn-secondary" id="homeSingleLinkText">╰┈➤ Tap-Here</button>
  </a>
  </div>
  </section>
@@ -3536,7 +3536,7 @@
  const homeLinkText = document.getElementById("homeSingleLinkText");
  if (d.singleLinkUrl && isSafeUrl(d.singleLinkUrl)) {
  homeLinkWrap.href = d.singleLinkUrl;
- homeLinkText.textContent = "➜] " + (d.singleLinkLabel || "Link");
+ homeLinkText.textContent = "╰┈➤ " + (d.singleLinkLabel || "Tap-Here");
  homeLinkWrap.style.display = "inline-block";
  } else {
  homeLinkWrap.style.display = "none";
